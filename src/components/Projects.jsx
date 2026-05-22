@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Sparkles, Activity, CreditCard } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, CreditCard } from 'lucide-react';
 
 const projects = [
   {
@@ -9,7 +9,7 @@ const projects = [
     tech: ["React Native", "Supabase", "Stripe", "Resend", "ML"],
     metrics: ["-15% Churn Reduction", "Real-time Sync"],
     github: "https://github.com/RayanErold/Xsubscrips",
-    live: "#",
+    live: "https://xsubscrips.com/",
     color: "from-purple-500/20 to-pink-500/20"
   },
   {
@@ -21,16 +21,6 @@ const projects = [
     github: "https://github.com/RayanErold/DateSpark",
     live: "https://datespark.live/",
     color: "from-yellow-500/20 to-orange-500/20"
-  },
-  {
-    title: "Engagement Analytics",
-    description: "Real-time behavior tracking and analytics dashboard for user retention optimization.",
-    icon: <Activity className="text-green-400" />,
-    tech: ["REST APIs", "Redis", "React", "Data Vis"],
-    metrics: ["+8% User Retention", "Real-time Tracking"],
-    github: "#",
-    live: "#",
-    color: "from-green-500/20 to-emerald-500/20"
   }
 ];
 
@@ -50,7 +40,7 @@ export default function Projects() {
           </a>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -92,10 +82,10 @@ export default function Projects() {
               </div>
 
               <div className="flex gap-4">
-                <a href={project.live} className="flex-grow flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white text-black font-semibold text-sm transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-grow flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white text-black font-semibold text-sm transition-transform hover:scale-[1.02] active:scale-[0.98]">
                   View Project <ExternalLink size={16} />
                 </a>
-                <a href={project.github} className="w-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
                   <Github size={20} className="text-white" />
                 </a>
               </div>
