@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Sparkles, Activity, Users, CreditCard } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, Activity, CreditCard } from 'lucide-react';
 
 const projects = [
   {
-    title: "SubsTrack",
+    title: "Xsubscrips",
     description: "Subscription management platform with ML-powered churn prediction and real-time cross-platform synchronization.",
     icon: <CreditCard className="text-purple-400" />,
     tech: ["React Native", "Supabase", "Stripe", "Resend", "ML"],
     metrics: ["-15% Churn Reduction", "Real-time Sync"],
-    github: "https://github.com/RayanErold/SubsTrack",
+    github: "https://github.com/RayanErold/Xsubscrips",
     live: "#",
     color: "from-purple-500/20 to-pink-500/20"
   },
@@ -21,16 +21,6 @@ const projects = [
     github: "https://github.com/RayanErold/DateSpark",
     live: "https://datespark.live/",
     color: "from-yellow-500/20 to-orange-500/20"
-  },
-  {
-    title: "Mentor Matching AI",
-    description: "Python-based matching system utilizing LLMs to connect mentors and mentees effectively.",
-    icon: <Users className="text-blue-400" />,
-    tech: ["Python", "OpenAI", "PostgreSQL", "Automation"],
-    metrics: ["-20% Manual Effort", "+70% Accuracy"],
-    github: "#",
-    live: "#",
-    color: "from-blue-500/20 to-indigo-500/20"
   },
   {
     title: "Engagement Analytics",
@@ -55,7 +45,7 @@ export default function Projects() {
               A selection of projects where I've combined backend engineering with artificial intelligence to solve real problems.
             </p>
           </div>
-          <a href="https://github.com/RayanErold" target="_blank" className="text-primary hover:underline flex items-center gap-2 font-medium">
+          <a href="https://github.com/RayanErold" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-2 font-medium">
             View all on GitHub <ExternalLink size={18} />
           </a>
         </div>
@@ -77,7 +67,7 @@ export default function Projects() {
                 <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
                   {project.icon}
                 </div>
-                <h3 className="text-2xl font-bold">{project.title}</h3>
+                <h3 className="text-2xl font-bold text-foreground">{project.title}</h3>
               </div>
 
               <p className="text-gray-400 mb-6 flex-grow">
@@ -106,7 +96,7 @@ export default function Projects() {
                   View Project <ExternalLink size={16} />
                 </a>
                 <a href={project.github} className="w-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                  <Github size={20} />
+                  <Github size={20} className="text-white" />
                 </a>
               </div>
             </motion.div>
