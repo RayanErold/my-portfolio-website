@@ -11,7 +11,7 @@ export default function Hero() {
 
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="max-w-4xl">
+          <div className="max-w-4xl text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]"
             >
-              I build <span className="text-gradient">scalable backend systems</span> & AI-powered products.
+              Hi, I'm <span className="text-gradient">Erold Rayan.</span>
             </motion.h1>
 
             <motion.p
@@ -72,7 +72,7 @@ export default function Hero() {
               <div className="w-full h-full rounded-3xl overflow-hidden border border-white/10 glass">
                 <img
                   src={profilePic}
-                  alt="Rayan Meguie"
+                  alt="Erold Rayan"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 />
               </div>
