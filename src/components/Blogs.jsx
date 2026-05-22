@@ -6,12 +6,12 @@ import { Calendar, Clock, ArrowUpRight, Search, BookOpen, Tag, X, Share2, Laptop
 const ArchitectureDiagram = () => (
   <div className="flex flex-col items-center gap-8 py-8 px-4 bg-secondary/20 border border-border rounded-2xl my-8 shadow-2xl relative overflow-hidden">
     <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-[80px]" />
-    
+
     <div className="text-center font-bold text-lg mb-2 text-foreground flex items-center gap-2">
       <Globe className="text-primary animate-pulse" size={20} />
       <span>DateSpark System Architecture</span>
     </div>
-    
+
     {/* Row 1: Client Application */}
     <div className="flex flex-col items-center">
       <div className="px-6 py-4 bg-primary/10 border border-primary/30 rounded-xl flex items-center gap-3 shadow-lg shadow-primary/10 hover:scale-105 transition-all">
@@ -88,12 +88,12 @@ const SequenceDiagram = () => {
   return (
     <div className="my-8 p-6 bg-secondary/20 border border-border rounded-2xl shadow-2xl relative overflow-hidden">
       <div className="absolute -top-12 -left-12 w-32 h-32 bg-primary/10 rounded-full blur-[80px]" />
-      
+
       <div className="text-center font-bold text-lg mb-6 text-foreground flex items-center justify-center gap-2">
         <Sparkles className="text-primary animate-pulse" size={20} />
         <span>Double-Pass AI Pipeline Sequence Flow</span>
       </div>
-      
+
       <div className="flex flex-col gap-4">
         {steps.map((step, idx) => (
           <div key={idx} className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 p-3 bg-secondary/40 border border-border/50 rounded-xl hover:bg-secondary transition-all">
@@ -119,7 +119,7 @@ const SequenceDiagram = () => {
 const blogs = [
   {
     id: 1,
-    title: "Building DateSpark: How We Engineered an AI-Powered Social Discovery Platform for Couples",
+    title: "Building DateSpark: How I Engineered an AI-Powered Social Discovery Platform",
     excerpt: "In an era dominated by doom-scrolling and digital fatigue, social platforms often succeed by keeping users glued to their screens. But what if we built a platform designed specifically to get people off their screens and into the real world? Enter DateSpark...",
     date: "May 22, 2026",
     readTime: "8 min read",
@@ -128,36 +128,37 @@ const blogs = [
     content: [
       { type: "paragraph", text: "In an era dominated by doom-scrolling and digital fatigue, social platforms often succeed by keeping users glued to their screens. But what if we built a platform designed specifically to get people off their screens and into the real world?" },
       { type: "paragraph", text: "Enter DateSpark—a premium, state-of-the-art social discovery platform that leverages advanced artificial intelligence and live event APIs to orchestrate personalized real-life couple experiences. Here is an in-depth breakdown of how we architected, built, and optimized DateSpark from the ground up." },
-      
+
       { type: "heading", text: "🗺️ The Architecture at a Glance" },
       { type: "paragraph", text: "DateSpark is built on a high-performance, containerized microservices architecture. It separates frontend visual performance from backend data intensive operations and AI orchestration." },
-      
+
       // Architecture diagram block
       { type: "diagram", name: "architecture" },
-      
+
       { type: "heading", text: "The Technology Stack" },
       { type: "paragraph", text: "1. Core Frontend: React 19, Vite (for lighting-fast local hot reloading and optimized assets compilation), Framer Motion (for premium micro-animations and sleek card transitions), and Lucide-React icons.\n2. Gateway API Backend: Node.js/Express handling secure sessions, payment processing, proxying, and caching.\n3. AI Logic Engine: Python/FastAPI microservice handling high-density prompts, vector embeddings, and structured JSON parsing.\n4. Cloud Database & Auth: Supabase PostgreSQL with Real-time synchronization and Row-Level Security (RLS) policies.\n5. Third-Party Integrations: Google Gemini 2.5 Pro, Stripe (Live Mode), Ticketmaster Discovery API, and SeatGeek Client API." },
-      
+
       { type: "heading", text: "⚡ The Double-Pass AI Pipeline" },
       { type: "paragraph", text: "One of the biggest challenges in building an AI date planner is accuracy. If an AI hallucinates a venue that closed in 2021 or suggests an outdoor picnic during a rainstorm, user trust is destroyed." },
       { type: "paragraph", text: "To solve this, we engineered a bulletproof Double-Pass AI Pipeline that couples the generative intelligence of Gemini with real-world validation APIs." },
-      
+
       // Sequence diagram block
       { type: "diagram", name: "sequence" },
-      
+
       { type: "heading", text: "Phase 1: Structural Generation (The AI Pass)" },
       { type: "paragraph", text: "Instead of asking the LLM to write a generic text description, we enforce a strict JSON schema. The AI acts as a logistical scheduler, determining the optimal sequence of events (e.g., matching cozy morning coffee places to romantic sunset dinner viewpoints), precise coordinate vectors for geographic constraints, and logical transition steps (e.g., injecting a customized \"Walk Time Connector\" between two stops)." },
-      
+
       { type: "heading", text: "Phase 2: Live Enrichment (The API Pass)" },
       { type: "paragraph", text: "Once the structure is generated, our Node.js Gateway intercepts it and queries real-world location and event discovery engines. We verify operating hours (ensuring the venue is actually open), live events (pulling live performance tickets from Ticketmaster or SeatGeek), and atmospherics (\"Vibe Tags\" like Cozy, Hidden Gem, or Highly Rated for immediate visual feedback)." },
-      
+
       { type: "heading", text: "🎨 Premium Design System & Micro-Animations" },
       { type: "paragraph", text: "We wanted DateSpark's first impression to be absolutely breathtaking. We rejected default styling and standard Tailwind configurations to craft a custom dark-mode-first glassmorphic system." },
       { type: "heading", text: "Key Interface Innovations:" },
       { type: "paragraph", text: "• The \"Visual Spark Card\": A high-performance card component that displays immersive, high-quality images of the target venues, weather forecasts, and customized route navigation overlays in real-time.\n• Atmospheric Spark Chat: An interactive conversational chat window equipped with customized typing prompts, which lets users easily guide the AI to regenerate or swap specific schedule stops on the fly.\n• Responsive BottomNav: An HSL-tailored floating menu that feels premium and responsive on both native mobile screen widths and desktop layouts." },
-      
+
       { type: "paragraph", text: "Here is an example of the clean, motion-enhanced UI structure used for key transitions:" },
-      { type: "code", language: "javascript", text: `// A snippet showcasing our high-fidelity, interactive Framer Motion wrapper
+      {
+        type: "code", language: "javascript", text: `// A snippet showcasing our high-fidelity, interactive Framer Motion wrapper
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const FadeInUp = ({ children, delay = 0 }) => (
@@ -170,22 +171,22 @@ export const FadeInUp = ({ children, delay = 0 }) => (
         {children}
     </motion.div>
 );` },
-      
+
       { type: "heading", text: "🛠️ Overcoming Core Engineering Challenges" },
       { type: "heading", text: "1. The \"UUID UUID\" Database Gotcha" },
       { type: "paragraph", text: "When building high-speed client interactions with Supabase, executing queries directly from the client can occasionally lead to unexpected 400 Bad Request responses (such as client-side library type-mismatches)." },
       { type: "paragraph", text: "• The Fix: We built a robust proxy layer in the Node.js Express server. By utilizing a secure service role client on the backend, the client forwards request signatures and queries standard databases safely, neutralizing client-side UUID issues entirely." },
-      
+
       { type: "heading", text: "2. Live Stripe Mode Integration" },
       { type: "paragraph", text: "We integrated Stripe's checkout system to allow immediate conversion from regular accounts to Elite Premium Memberships." },
       { type: "paragraph", text: "• The Fix: We utilized a secure webhook listener (/api/webhook) that safely parses raw request buffers to verify cryptographical Stripe signatures. Once Stripe clears a transaction, a secure update immediately adjusts the user profile's is_premium flag and premium_expiry date in real time." },
-      
-      { type: "heading", text: "📈 What We Learned" },
-      { type: "paragraph", text: "Building DateSpark taught us valuable lessons about building production ready AI applications:" },
+
+      { type: "heading", text: "📈 What I Learned" },
+      { type: "paragraph", text: "Building DateSpark taught me valuable lessons about building production ready AI applications:" },
       { type: "paragraph", text: "1. User Control is Critical: Users do not want the AI to make every decision. They want the capability to accept, decline, swap, or re-prompt specific choices within an itinerary before committing to it.\n2. Speed & Caching: AI generation can take a few seconds. We implemented aggressive, localized server-side caching (node-cache) for trending itineraries and static location results to maintain sub-second load times for hot-path user actions." },
-      
+
       { type: "heading", text: "🚀 Try It Today!" },
-      { type: "paragraph", text: "DateSpark is now live and fully operational on the cloud!\n\n• Explore the Platform: [datespark.live](https://datespark.live)\n• Under the Hood: Log in with your profile to configure personal preferences, discover local hotspots, and access tailored schedules.\n\nLet me know what you think of this architecture in the comments below!" }
+      { type: "paragraph", text: "DateSpark is now live and fully operational on the cloud!\n\n• Explore the Platform: [datespark.live](https://datespark.live)\n• Under the Hood: Log in with your profile to configure personal preferences, discover local hotspots, and access tailored schedules." }
     ]
   },
   {
@@ -201,28 +202,28 @@ export const FadeInUp = ({ children, delay = 0 }) => (
       { type: "paragraph", text: "Think about the tasks that used to take hours, days, or even weeks to get through. Today, those exact same processes are being knocked out in a matter of minutes. It’s a massive shift, and if you run a small local business, it is incredibly important to start looking at where these tools can fit into your daily setup." },
       { type: "paragraph", text: "I get it—a lot of people are still intimidated by AI. But instead of avoiding it, we need to get our hands dirty and actually learn how it works. Technology moves way too fast. If you ignore tools that are quickly becoming \"must-haves,\" you’re going to get left behind. It’s just how it goes. Big companies already see the writing on the wall and are pouring millions into automation. Luckily, you don't need a massive budget to see a high ROI." },
       { type: "paragraph", text: "Here are the five areas where I see AI making the biggest impact for small businesses right now." },
-      
+
       { type: "heading", text: "1. 24/7 Customer Support" },
       { type: "paragraph", text: "Customer support is the actual engine of your business. When it’s great, it drives up your value; when it’s messy, it drags everything down.\n\nThe problem is that traditional support relies entirely on humans handling every single ticket, call, and customer issue manually. We have physical limits, we need breaks, and covering different shifts means hiring multiple teams." },
       { type: "paragraph", text: "By introducing AI automation, you can set up smart chatbots and virtual assistants to take care of the baseline stuff: answering common questions, routing complex issues to your specialist team, or handling simple tasks like booking appointments and checking order statuses. Your customers get the fast responses they want, and you don’t have to stay glued to a screen all day." },
-      
+
       { type: "heading", text: "2. Marketing" },
       { type: "paragraph", text: "Consistency is usually the first thing to go when you're running a small team. AI has the ability to draft emails, generate social media posts, personalize your campaigns, and brainstorm content ideas tailored right to your target audience." },
       { type: "paragraph", text: "When you have an AI handling the initial legwork, staying consistent with your marketing becomes ten times easier. You get to maintain a solid brand presence across all your channels without needing the budget for a dedicated marketing team." },
-      
+
       { type: "heading", text: "3. Automated Bookkeeping and Invoicing" },
       { type: "paragraph", text: "No one goes into business because they love manual data entry. Integrating AI into your financial tools can automatically categorize your expenses, reconcile bank statements, and scan digital invoices to extract data instantly." },
       { type: "paragraph", text: "On top of making the whole system move faster, it can automatically fire off polite payment reminders for outstanding invoices. It takes the human error out of the equation and keeps your cash flow moving." },
-      
+
       { type: "heading", text: "4. Frictionless Scheduling" },
       { type: "paragraph", text: "The endless back-and-forth emails just to find a meeting time is a massive time sink. AI scheduling tools eliminate that headache entirely by finding open slots, booking appointments, and sending out reminders automatically." },
       { type: "paragraph", text: "This is huge for service-based businesses or any team that handles a lot of calendar coordination. It keeps you from missing out on hot leads because the system locks them in immediately. It essentially does the work of a full-time assistant, running 24/7 without a break. That’s pure ROI." },
-      
+
       { type: "heading", text: "5. Streamlining Internal Workflows" },
       { type: "paragraph", text: "Behind the scenes, small businesses can use AI to summarize meetings, route incoming emails, assign tasks, and connect different apps so routine work just happens in the background." },
       { type: "paragraph", text: "This keeps your team moving fast and prevents projects from stalling out due to a missed follow-up." },
       { type: "paragraph", text: "Take a local hair salon, for example. They could use AI to automatically answer booking inquiries, send out text reminders to clients, post weekly promotions, and even summarize staff meetings. Over the long term, that kind of efficiency completely changes how much a business can handle." },
-      
+
       { type: "heading", text: "The Next Step" },
       { type: "paragraph", text: "At the end of the day, you don't need to automate your entire operation overnight. Pick one bottleneck, whether it’s your inbox, your calendar, or your customer service—and test it out." }
     ]
@@ -252,8 +253,8 @@ export default function Blogs() {
   const filteredBlogs = blogs.filter(blog => {
     const matchesCategory = selectedCategory === "All" || blog.category === selectedCategory;
     const matchesSearch = blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          blog.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          blog.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+      blog.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -301,11 +302,10 @@ export default function Blogs() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
-                selectedCategory === cat
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${selectedCategory === cat
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105'
                   : 'bg-secondary border border-border text-muted hover:text-foreground hover:bg-secondary/80'
-              }`}
+                }`}
             >
               {cat}
             </button>
@@ -432,7 +432,7 @@ export default function Blogs() {
                     <div className="text-sm text-muted mb-3 flex items-center gap-2">
                       <Calendar size={14} /> Published on {selectedBlog.date} by Erold Rayan
                     </div>
-                    <h1 
+                    <h1
                       style={selectedBlog.fontFamily ? { fontFamily: selectedBlog.fontFamily } : {}}
                       className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight text-foreground"
                     >
@@ -440,7 +440,7 @@ export default function Blogs() {
                     </h1>
                   </header>
 
-                  <div 
+                  <div
                     style={selectedBlog.fontFamily ? { fontFamily: selectedBlog.fontFamily } : {}}
                     className="space-y-6 text-foreground/90 text-lg leading-relaxed"
                   >
@@ -497,7 +497,7 @@ export default function Blogs() {
                       return null;
                     })}
                   </div>
-                  
+
                   {/* Article footer tags */}
                   <div className="mt-12 pt-8 border-t border-border flex flex-wrap gap-2">
                     {selectedBlog.tags.map(tag => (
