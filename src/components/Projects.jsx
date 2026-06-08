@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Sparkles, CreditCard } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, CreditCard, Shield } from 'lucide-react';
 
 const projects = [
   {
@@ -21,6 +21,16 @@ const projects = [
     github: "https://github.com/RayanErold/DateSpark",
     live: "https://datespark.live/",
     color: "from-yellow-500/20 to-orange-500/20"
+  },
+  {
+    title: "Consumer Rights AI Agent",
+    description: "Grounded Retrieval-Augmented Generation assistant utilizing Llama 3.3 and ChromaDB to synthesize mathematically cited legal guardrails for consumer disputes.",
+    icon: <Shield className="text-emerald-400" />,
+    tech: ["Python", "ChromaDB", "Llama 3.3", "Groq", "Gradio"],
+    metrics: ["Zero-Hallucination Guardrails", "Cited Statutory Proofs"],
+    github: "https://github.com/RayanErold/ai201-project1-unofficial-guide-starter",
+    live: "https://f9e63348527abdab5f.gradio.live",
+    color: "from-emerald-500/20 to-teal-500/20"
   }
 ];
 
@@ -40,7 +50,7 @@ export default function Projects() {
           </a>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -60,7 +70,7 @@ export default function Projects() {
                 <h3 className="text-2xl font-bold text-foreground">{project.title}</h3>
               </div>
 
-              <p className="text-gray-400 mb-6 flex-grow">
+              <p className="text-gray-400 mb-6 flex-grow text-sm md:text-base leading-relaxed">
                 {project.description}
               </p>
 
@@ -96,3 +106,4 @@ export default function Projects() {
     </section>
   );
 }
+

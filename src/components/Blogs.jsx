@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, ArrowUpRight, Search, BookOpen, Tag, X, Share2, Laptop, Server, Database, Brain, Sparkles, Globe, CreditCard, ArrowDown, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowUpRight, Search, BookOpen, Tag, X, Share2, Laptop, Server, Database, Brain, Sparkles, Globe, CreditCard, ArrowDown, ArrowRight, Cpu, FileText, Layers, ShieldCheck } from 'lucide-react';
 
 // Visual System Architecture Diagram Component
 const ArchitectureDiagram = () => (
@@ -116,6 +116,204 @@ const SequenceDiagram = () => {
   );
 };
 
+// Formatting Helper for Paragraphs to support Links, Bold and Code tags
+const renderTextWithFormatting = (text) => {
+  if (!text) return "";
+  
+  // Matches:
+  // 1. Links: \[([^\]]+)\]\(([^)]+)\)
+  // 2. Bold: \*\*([^*]+)\*\*
+  // 3. Inline Code: `([^`]+)`
+  const regex = /(\[([^\]]+)\]\(([^)]+)\))|(\*\*([^*]+)\*\*)|(`([^`]+)`)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+
+    if (match[1]) {
+      // Link match
+      parts.push(
+        <a
+          key={match.index}
+          href={match[3]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline font-semibold"
+        >
+          {match[2]}
+        </a>
+      );
+    } else if (match[4]) {
+      // Bold match
+      parts.push(
+        <strong key={match.index} className="font-bold text-foreground">
+          {match[5]}
+        </strong>
+      );
+    } else if (match[6]) {
+      // Inline code match
+      parts.push(
+        <code key={match.index} className="px-1.5 py-0.5 rounded bg-secondary text-emerald-400 font-mono text-sm border border-border/30">
+          {match[7]}
+        </code>
+      );
+    }
+
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+};
+
+// Visual RAG System Architecture Diagram Component
+const RagArchitectureDiagram = () => {
+  return (
+    <div className="my-10 p-6 md:p-8 bg-secondary/20 border border-border rounded-2xl shadow-2xl relative overflow-hidden">
+      {/* Background radial glow */}
+      <div className="absolute -top-24 -left-24 w-48 h-48 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="text-center font-bold text-lg mb-8 text-foreground flex items-center justify-center gap-2">
+        <Cpu className="text-primary animate-pulse" size={20} />
+        <span>Production-Grade RAG Engine Architecture</span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
+        {/* Connector line for large screens */}
+        <div className="hidden lg:block absolute left-1/2 top-1/4 bottom-1/4 w-[1px] bg-border border-dashed z-0" />
+
+        {/* Phase 1: Ingestion Track */}
+        <div className="flex flex-col gap-6 relative z-10">
+          <div className="text-sm font-bold text-primary flex items-center gap-2 border-b border-border/50 pb-2">
+            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary/20 text-[11px] font-bold">1</span>
+            <span>DATA INGESTION & VECTOR INDEXING</span>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            {/* Step 1.1 */}
+            <div className="p-4 bg-secondary/40 border border-border rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-primary/30">
+              <div className="p-2 rounded-lg bg-primary/10 text-primary mt-0.5">
+                <FileText size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-foreground">10 Raw txt Files</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">Raw statutory frameworks, PDFs, and legal text documents ingested.</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center text-primary/60"><ArrowDown size={16} /></div>
+
+            {/* Step 1.2 */}
+            <div className="p-4 bg-secondary/40 border border-border rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-primary/30">
+              <div className="p-2 rounded-lg bg-primary/10 text-primary mt-0.5">
+                <Layers size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-foreground">Sliding-Window Chunking</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">String normalization & division into 500-char blocks with 100-char overlap.</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center text-primary/60"><ArrowDown size={16} /></div>
+
+            {/* Step 1.3 */}
+            <div className="p-4 bg-secondary/40 border border-border rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-primary/30">
+              <div className="p-2 rounded-lg bg-primary/10 text-primary mt-0.5">
+                <Brain size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-foreground">all-MiniLM-L6-v2 Model</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">On-device local vector embeddings generation (384-dimensional space).</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center text-primary/60"><ArrowDown size={16} /></div>
+
+            {/* Step 1.4 */}
+            <div className="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-emerald-500/30">
+              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 mt-0.5">
+                <Database size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-emerald-400">Local ChromaDB Vector Store</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">Persistent DB configuration saving immutable indexes & .gov metadata.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Phase 2: Inference Track */}
+        <div className="flex flex-col gap-6 relative z-10">
+          <div className="text-sm font-bold text-emerald-400 flex items-center gap-2 border-b border-border/50 pb-2">
+            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-[11px] font-bold">2</span>
+            <span>SEMANTIC RETRIEVAL & INFERENCE</span>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            {/* Step 2.1 */}
+            <div className="p-4 bg-secondary/40 border border-border rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-emerald-500/30">
+              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 mt-0.5">
+                <Laptop size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-foreground">User Query</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">Plain English input containing user's consumer rights dispute query.</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center text-emerald-500/60"><ArrowDown size={16} /></div>
+
+            {/* Step 2.2 */}
+            <div className="p-4 bg-secondary/40 border border-border rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-emerald-500/30">
+              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 mt-0.5">
+                <Search size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-foreground">Semantic similarity Matrix Match</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">ChromaDB calculates cosine distance comparison between query and indexes.</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center text-emerald-500/60"><ArrowDown size={16} /></div>
+
+            {/* Step 2.3 */}
+            <div className="p-4 bg-secondary/40 border border-border rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-emerald-500/30">
+              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 mt-0.5">
+                <Sparkles size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-foreground">Context & Metadata payload</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">Top-K (4 chunks) + metadata extracted to create defensive system prompt.</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center text-emerald-500/60"><ArrowDown size={16} /></div>
+
+            {/* Step 2.4 */}
+            <div className="p-4 bg-primary/5 border border-primary/20 rounded-xl flex items-start gap-4 hover:scale-[1.02] transition-all hover:border-primary/30">
+              <div className="p-2 rounded-lg bg-primary/10 text-primary mt-0.5">
+                <ShieldCheck size={18} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xs font-bold text-primary font-mono">llama-3.3-70b-versatile</h4>
+                <p className="text-[11px] text-muted mt-1 leading-relaxed">Deterministic inference (Temp=0.0). Safe Refusal / Citations output UI.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const blogs = [
   {
     id: 1,
@@ -226,6 +424,51 @@ export const FadeInUp = ({ children, delay = 0 }) => (
 
       { type: "heading", text: "The Next Step" },
       { type: "paragraph", text: "At the end of the day, you don't need to automate your entire operation overnight. Pick one bottleneck, whether it’s your inbox, your calendar, or your customer service—and test it out." }
+    ]
+  },
+  {
+    id: 3,
+    title: "Zero-Hallucination AI: Building a Production-Grade RAG Engine for Consumer Rights",
+    excerpt: "In the modern digital economy, consumers are constantly entering binding agreements, handling banking transactions, and navigating tenant workflows. While federal statutes guarantee powerful baseline protections, this critical information is rarely accessible when a dispute occurs. To bridge this gap, I built a production-grade Retrieval-Augmented Generation (RAG) engine that performs local semantic vector queries and synthesizes grounded, mathematically cited legal guardrails.",
+    date: "June 08, 2026",
+    readTime: "7 min read",
+    category: "Software Engineering",
+    tags: ["RAG Engine", "ChromaDB", "LLMs", "Consumer Rights", "Llama 3.3"],
+    fontFamily: "'Times New Roman', Times, serif",
+    content: [
+      { type: "paragraph", text: "In the modern digital economy, consumers are constantly entering binding agreements, handling banking transactions, and navigating tenant workflows. While federal statutes—like the Fair Credit Reporting Act (FCRA) or the Truth in Lending Act (TILA)—explicitly guarantee citizens powerful baseline protections, this critical information is rarely accessible when a dispute occurs." },
+      { type: "paragraph", text: "To bridge this gap, I built a production-grade Retrieval-Augmented Generation (RAG) engine. This system exposes a natural language interface that ingests unmanipulated regulatory frameworks, performs local semantic vector queries, and synthesizes grounded, mathematically cited legal guardrails for everyday citizens." },
+      
+      { type: "heading", text: "The Problem: Information Asymmetry" },
+      { type: "paragraph", text: "The primary roadblock to consumer equity is information asymmetry. Corporate legal teams and massive financial institutions rely on the fact that ordinary consumers do not have the technical capability, time, or legal training to parse dense, multi-page regulatory portals or statutory PDFs during a high-stress dispute." },
+      { type: "paragraph", text: "When attempting to use standard Large Language Models (LLMs) to answer these questions, developers run into a critical security risk: stochastic hallucinations. In a legal or financial context, an AI model confidently inventing a non-existent timeline, grace period, or statutory exception is catastrophic. Standard LLMs lack an explicit mechanism to prove the provenance of their assertions, making them fundamentally unsafe for deployment in deterministic domains." },
+      
+      { type: "heading", text: "The Solution: Decoupled RAG Architecture" },
+      { type: "paragraph", text: "The solution is a decoupled architecture that completely separates factual knowledge storage from linguistic reasoning. By building a RAG pipeline, the system does not rely on the LLM's static pre-trained data to remember laws." },
+      { type: "paragraph", text: "Instead, the system uses a local, high-signal vector database to mathematically isolate exact, pre-verified legal clauses matching a user's plain-English query. This text is then injected directly into a highly guardrailed LLM runtime environment. The model is restricted to acting purely as an in-context processing engine, transforming complex legal prose into an actionable, user-friendly response while programmatically outputting official source citations." },
+      
+      { type: "heading", text: "Tech Stack" },
+      { type: "paragraph", text: "• **Data Processing & Ingestion**: Python 3.11 with an isolated virtual environment (`.venv`) utilizing sliding-window string slice segmentations.\n• **Embedding Model**: `sentence-transformers/all-MiniLM-L6-v2` running locally on-device for zero-cost, low-latency vector generation.\n• **Vector Database**: `ChromaDB` (Persistent Local Client configuration) for index immutability, metadata mapping, and local cosine distance scoring.\n• **Inference Layer**: Groq API Cloud Client utilizing `llama-3.3-70b-versatile` operating at a deterministic `temperature=0.0`.\n• **User Interface**: `Gradio` web application server displaying segregated execution outputs." },
+      
+      { type: "heading", text: "Architecture & Workflow" },
+      { type: "diagram", name: "rag-architecture" },
+      
+      { type: "paragraph", text: "1. **Ingestion & Schema Mapping**: Raw source documents are preprocessed to strip out layout noise. They are broken into uniform chunks of 500 characters with a 100-character sliding overlap.\n2. **Vector Indexing**: Chunks are vectorized using the `all-MiniLM-L6-v2` model and saved to a local persistent disk repository (`/chroma_db`). Crucially, each vector is explicitly bound to a metadata schema dictionary tracking its parent file and its official `.gov` URL.\n3. **Semantic Retrieval**: When a user poses a question, `ChromaDB` executes a local similarity matrix match, calculating the absolute mathematical closeness of the query to the text indexes.\n4. **Context-Injected Generation**: The top 4 matching blocks, along with their metadata fields, are structured inside an aggressive system prompt and passed to Groq. The LLM synthesizes the final text, and the UI maps the response into segregated, un-editable presentation panels." },
+      
+      { type: "heading", text: "Engineering Challenges: Strict Systemic Grounding" },
+      { type: "paragraph", text: "The single greatest engineering hurdle was enforcing strict systemic grounding. LLMs natively try to prioritize their vast pre-trained knowledge base when answering common financial questions." },
+      { type: "paragraph", text: "To overcome this, I engineered a highly defensive prompt payload that treated the LLM as an immutable black box with a zero-tolerance constraint for external logic. Combined with pinning the model's inference parameter to a completely deterministic `temperature=0.0`, any out-of-scope query (e.g., asking about high-yield interest rates or sports scores) immediately triggered our pipeline's fallback handler, causing the system to safely return an explicit refusal string rather than a plausible hallucination." },
+      
+      { type: "heading", text: "Key Takeaways & Learnings" },
+      { type: "paragraph", text: "Through this project, I gained a deep operational understanding of how chunk sizing alters vector density and semantic retrieval precision." },
+      { type: "paragraph", text: "Initially, utilizing loose, large paragraph boundaries diluted the mathematical distinctness of the underlying laws. Slicing data into small, high-density 500-character blocks ensured that specific numeric constraints (such as the Fair Credit Reporting Act's strict 30-day investigation timeline) remained highly concentrated. I learned that the effectiveness of an intelligent system is completely dependent on data preparation; if your database ingestion splits text poorly, the most advanced LLM in the world still cannot generate an accurate answer." },
+      
+      { type: "heading", text: "Future Roadmap" },
+      { type: "paragraph", text: "While the current architecture delivers exceptional text precision, it exhibits an operational bottleneck when handling complex, multi-variable edge cases requiring arithmetic deductions (such as calculating if a precise corporate paycheck deduction violates the Fair Labor Standards Act's minimum wage floor based on a custom hourly rate)." },
+      { type: "paragraph", text: "To resolve this, future iterations will feature a Two-Step Hybrid RAG Router:\n\n• **Agentic Tool-Calling**: An upstream supervisor agent will analyze the query structure. If numeric values or mathematical operations are present, the system will temporarily bypass semantic search and execute an isolated Python script execution loop to calculate the exact financial delta.\n• **Hybrid BM25 Vector Re-ranking**: Merging keyword-matching algorithms with our current semantic database index will guarantee absolute keyword recall on hyper-specific legal references and section codes.\n• **Chunking strategy**: For this project I mainly used semantic chunking but I look forward to implementing others chunking methods such as fixed chunking and size chunking to see how the embedding model handles these cases and what accuracy the vectors embedded have." },
+      
+      { type: "heading", text: "Conclusion" },
+      { type: "paragraph", text: "Building this consumer protection RAG engine demonstrated that software engineering can directly level the financial playing field between individual citizens and massive corporate institutions. By treating the AI model purely as an algorithmic processing engine rather than an oracle of truth, we can deploy zero-hallucination architectures that provide transparent, mathematically verifiable, and traceably cited information to users when they need it most." }
     ]
   }
 ];
@@ -446,35 +689,11 @@ export default function Blogs() {
                   >
                     {selectedBlog.content.map((block, index) => {
                       if (block.type === 'paragraph') {
-                        const text = block.text;
-                        const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-                        const parts = [];
-                        let lastIndex = 0;
-                        let match;
-
-                        while ((match = linkRegex.exec(text)) !== null) {
-                          if (match.index > lastIndex) {
-                            parts.push(text.substring(lastIndex, match.index));
-                          }
-                          parts.push(
-                            <a
-                              key={match.index}
-                              href={match[2]}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary hover:underline font-semibold"
-                            >
-                              {match[1]}
-                            </a>
-                          );
-                          lastIndex = linkRegex.lastIndex;
-                        }
-
-                        if (lastIndex < text.length) {
-                          parts.push(text.substring(lastIndex));
-                        }
-
-                        return <p key={index} className="whitespace-pre-line">{parts.length > 0 ? parts : text}</p>;
+                        return (
+                          <p key={index} className="whitespace-pre-line text-foreground/90">
+                            {renderTextWithFormatting(block.text)}
+                          </p>
+                        );
                       } else if (block.type === 'heading') {
                         return <h2 key={index} className="text-2xl md:text-3xl font-bold text-foreground pt-6 mt-4 flex items-center gap-2">{block.text}</h2>;
                       } else if (block.type === 'code') {
@@ -492,6 +711,8 @@ export default function Blogs() {
                           return <ArchitectureDiagram key={index} />;
                         } else if (block.name === 'sequence') {
                           return <SequenceDiagram key={index} />;
+                        } else if (block.name === 'rag-architecture') {
+                          return <RagArchitectureDiagram key={index} />;
                         }
                       }
                       return null;
