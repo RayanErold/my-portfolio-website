@@ -314,6 +314,124 @@ const RagArchitectureDiagram = () => {
   );
 };
 
+// Visual FitFindr Flow Diagram Component
+const FitFindrDiagram = () => (
+  <div className="my-10 p-6 md:p-8 bg-secondary/20 border border-border rounded-2xl shadow-2xl relative overflow-hidden">
+    {/* Background radial glow */}
+    <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+    <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-pink-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+    <div className="text-center font-bold text-lg mb-8 text-foreground flex items-center justify-center gap-2">
+      <Cpu className="text-primary animate-pulse" size={20} />
+      <span>FitFindr Agent Pipeline Flow</span>
+    </div>
+
+    <div className="flex flex-col items-center gap-4 max-w-2xl mx-auto">
+      {/* Step 1: Input */}
+      <div className="w-full p-4 bg-secondary/40 border border-border rounded-xl flex items-center gap-4 hover:scale-[1.01] transition-all">
+        <div className="p-2.5 rounded-lg bg-primary/10 text-primary shrink-0">
+          <FileText size={20} />
+        </div>
+        <div className="text-left flex-grow">
+          <h4 className="text-sm font-bold text-foreground">User Query Input</h4>
+          <p className="text-xs text-muted mt-0.5">e.g., "vintage graphic tee under $30, size M"</p>
+        </div>
+      </div>
+
+      <ArrowDown className="text-primary" size={20} />
+
+      {/* Step 2: Orchestration & Parsing */}
+      <div className="w-full p-4 bg-secondary/40 border border-border rounded-xl flex items-center gap-4 hover:scale-[1.01] transition-all">
+        <div className="p-2.5 rounded-lg bg-green-500/10 text-green-400 shrink-0">
+          <Layers size={20} />
+        </div>
+        <div className="text-left flex-grow">
+          <h4 className="text-sm font-bold text-foreground">1. Query Parsing (_parse_query)</h4>
+          <p className="text-xs text-muted mt-0.5">Regex parses description, size, and budget ceiling without LLM cost.</p>
+        </div>
+      </div>
+
+      <ArrowDown className="text-primary" size={20} />
+
+      {/* Step 3: Offline Keyword Search */}
+      <div className="w-full p-4 bg-secondary/40 border border-border rounded-xl flex items-center gap-4 hover:scale-[1.01] transition-all">
+        <div className="p-2.5 rounded-lg bg-yellow-500/10 text-yellow-400 shrink-0">
+          <Search size={20} />
+        </div>
+        <div className="text-left flex-grow">
+          <h4 className="text-sm font-bold text-foreground">2. Deterministic Search (search_listings)</h4>
+          <p className="text-xs text-muted mt-0.5">Offline distinct token overlap scoring over local JSON dataset.</p>
+        </div>
+      </div>
+
+      <ArrowDown className="text-primary" size={20} />
+
+      {/* Conditional Split */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+        {/* Branch A: No Matches */}
+        <div className="p-4 bg-red-500/5 border border-red-500/20 rounded-xl flex flex-col justify-between hover:scale-[1.01] transition-all">
+          <div>
+            <h4 className="text-sm font-bold text-red-400 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+              No Matches Found
+            </h4>
+            <p className="text-xs text-muted mt-1.5 leading-relaxed">
+              Short-circuits immediately. Sets a helpful error message and returns to user to save token costs.
+            </p>
+          </div>
+          <div className="mt-4 p-2 bg-red-500/10 rounded text-[10px] font-mono text-red-300">
+            return session["error"]
+          </div>
+        </div>
+
+        {/* Branch B: Match Selected */}
+        <div className="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl flex flex-col justify-between hover:scale-[1.01] transition-all">
+          <div>
+            <h4 className="text-sm font-bold text-emerald-400 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              Match Selected
+            </h4>
+            <p className="text-xs text-muted mt-1.5 leading-relaxed">
+              Picks top listing and triggers downstream LLM modules for outfit ideas and caption generation.
+            </p>
+          </div>
+          <div className="mt-4 p-2 bg-emerald-500/10 rounded text-[10px] font-mono text-emerald-300">
+            session["selected_item"] = top_match
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full flex justify-end md:w-1/2 md:translate-x-1/2">
+        <ArrowDown className="text-emerald-400 mx-auto" size={20} />
+      </div>
+
+      {/* Step 4: LLM Outfit Suggestion */}
+      <div className="w-full p-4 bg-secondary/40 border border-border rounded-xl flex items-center gap-4 hover:scale-[1.01] transition-all border-l-2 border-l-emerald-500">
+        <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-400 shrink-0">
+          <Brain size={20} />
+        </div>
+        <div className="text-left flex-grow">
+          <h4 className="text-sm font-bold text-foreground">3. LLM Styling (suggest_outfit)</h4>
+          <p className="text-xs text-muted mt-0.5">Calls Groq LLM to design an outfit matching the user's closet (Temp=0.7).</p>
+        </div>
+      </div>
+
+      <ArrowDown className="text-emerald-400" size={20} />
+
+      {/* Step 5: LLM Caption Generator */}
+      <div className="w-full p-4 bg-secondary/40 border border-border rounded-xl flex items-center gap-4 hover:scale-[1.01] transition-all border-l-2 border-l-emerald-500">
+        <div className="p-2.5 rounded-lg bg-pink-500/10 text-pink-400 shrink-0">
+          <Sparkles size={20} />
+        </div>
+        <div className="text-left flex-grow">
+          <h4 className="text-sm font-bold text-foreground">4. Social Copy (create_fit_card)</h4>
+          <p className="text-xs text-muted mt-0.5">Calls Groq LLM to write a high-temperature (Temp=1.0) OOTD caption.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const blogs = [
   {
     id: 1,
@@ -469,6 +587,80 @@ export const FadeInUp = ({ children, delay = 0 }) => (
       
       { type: "heading", text: "Conclusion" },
       { type: "paragraph", text: "Building this consumer protection RAG engine demonstrated that software engineering can directly level the financial playing field between individual citizens and massive corporate institutions. By treating the AI model purely as an algorithmic processing engine rather than an oracle of truth, we can deploy zero-hallucination architectures that provide transparent, mathematically verifiable, and traceably cited information to users when they need it most." }
+    ]
+  },
+  {
+    id: 4,
+    title: "Building FitFindr: A Small Agent That Turns Thrift Listings into Outfit Ideas",
+    excerpt: "How I designed a three-tool LLM agent that stays cheap, testable, and hard to break.",
+    date: "June 16, 2026",
+    readTime: "5 min read",
+    category: "Projects & Build Logs",
+    tags: ["AI Agents", "Python", "LLM Orchestration", "API Design"],
+    content: [
+      { type: "paragraph", text: "How I designed a three-tool LLM agent that stays cheap, testable, and hard to break." },
+      { type: "heading", text: "The problem" },
+      { type: "paragraph", text: "Secondhand shopping is great until you're staring at a single listing wondering, *\"Okay… but what do I actually wear this with?\"* The item is cute. Whether it fits your closet is a different question entirely.\n\nFitFindr is my answer to that. You describe what you're after in plain English — *\"vintage graphic tee under $30, size M\"* — and it does three things:\n\n1. **Finds** a matching secondhand listing.\n2. **Styles** it against the clothes you already own.\n3. **Writes** a shareable, OOTD-style caption for the find.\n\nIt's a small project, but it's a complete one: a natural-language query goes in, and a ready-to-post outfit card comes out. This post walks through how it's built, the decisions that shaped it, and the parts I'd do differently next time." },
+      { type: "heading", text: "The shape of the system" },
+      { type: "paragraph", text: "The whole thing is an orchestrated pipeline. One entry point, `run_agent(query, wardrobe)`, drives three tools in sequence and carries state between them in a single dictionary." },
+      { type: "diagram", name: "fitfindr-flow" },
+      { type: "paragraph", text: "Three tools, each with a single job:\n\n• **search_listings** `(description, size?, max_price?) -> list[dict]`: Deterministic, offline keyword search over a local dataset.\n• **suggest_outfit** `(new_item, wardrobe) -> str`: LLM-backed styling against the user's closet.\n• **create_fit_card** `(outfit, new_item) -> str`: LLM-backed social caption generation.\n\nThe split matters. Only two of the three tools call an LLM, and the one that runs first — search — doesn't. That single design choice ripples through everything: cost, testability, and how the agent behaves when there's nothing to find." },
+      { type: "heading", text: "Decision 1: Don't use an LLM where a regex will do" },
+      { type: "paragraph", text: "The most tempting mistake in an \"AI project\" is to reach for the model on every step. Query parsing is the obvious candidate — *\"vintage graphic tee under $30, size M\"* clearly needs to be broken into a description, a size, and a budget. Why not just ask the model?\n\nBecause parsing this is a *solved* problem that doesn't need a 70-billion-parameter model, a network round trip, or a per-call cost. So `_parse_query()` is plain regex:" },
+      { type: "code", language: "python", text: `# Only treat a number as a budget when it's tied to "$" or a price keyword,
+# so a stray number in the description isn't mistaken for a budget.
+price_phrase = re.search(
+    r"(?:under|below|less than|max(?:\\s*price)?|up to|<)\\s*\\$?\\s*(\\d+(?:\\.\\d+)?)"
+    r"|\\$\\s*(\\d+(?:\\.\\d+)?)",
+    text,
+    flags=re.IGNORECASE,
+)` },
+      { type: "paragraph", text: "That regex encodes a real piece of product judgment: \"size 8 boots\" shouldn't read `8` as a $8 budget, so a number only counts as a price when it's anchored to a `$` or a phrase like *under* / *max* / *up to*. Sizes get similar care — bare `s`/`m`/`l` are too ambiguous to grab on their own, so those require an explicit `size M`, while `medium` is safe to match anywhere.\n\nThe payoff: parsing is instant, free, deterministic, and unit-testable without a network connection. **Use the LLM for the parts that genuinely need language understanding — styling and voice — and nothing else.**" },
+      { type: "heading", text: "Decision 2: Make search deterministic and offline" },
+      { type: "paragraph", text: "`search_listings` scores every listing by keyword overlap against a local JSON dataset. No embeddings, no vector DB, no API:" },
+      { type: "code", language: "python", text: `# Distinct keywords matched is the primary score; total occurrences
+# break ties so a more on-topic listing ranks higher.
+distinct = sum(1 for kw in set(keywords) if kw in haystack_set)
+occurrences = sum(haystack.count(kw) for kw in keywords)
+score = distinct * 1000 + occurrences` },
+      { type: "paragraph", text: "The `distinct * 1000 + occurrences` trick is a cheap way to get a two-level sort in a single integer: rank first by *how many* distinct query terms a listing matches, then break ties by *how often* they appear. A listing that hits three of your keywords always beats one that hits two, no matter how many times the loser repeats a word.\n\nFilters run before scoring (price ceiling is inclusive; size matching is tokenized so a query for `M` still matches an `S/M` listing), and any listing with zero keyword overlap is dropped entirely rather than returned as a weak match.\n\nIs this as smart as semantic search? No. But it's **predictable**, which for a search box is often more valuable than clever. And it never costs a cent or a round trip." },
+      { type: "heading", text: "Decision 3: Prompts that encode taste, not just instructions" },
+      { type: "paragraph", text: "The two LLM tools are where the project earns its \"AI\" label, and the interesting work there is prompt design.\n\nFor `suggest_outfit`, the closet is formatted into a named list so the model can reference real pieces rather than inventing them:" },
+      { type: "code", language: "python", text: `wardrobe_lines.append(
+    f"- {w.get('name', 'item')} "
+    f"({w.get('category', 'n/a')}; "
+    f"{', '.join(w.get('colors', [])) or 'n/a'})"
+)` },
+      { type: "paragraph", text: "The prompt then explicitly asks the model to *\"reference the wardrobe pieces by name and explain why each outfit works.\"* That instruction came from testing — early versions gave generic advice that ignored the closet entirely.\n\n`create_fit_card` got similar iteration. The first captions read like product listings. The fix was a tighter spec in the prompt — mention the item name, price, and platform *once each*, sound like a real OOTD post, not marketing copy — plus a deliberate temperature choice:" },
+      { type: "code", language: "python", text: `response = client.chat.completions.create(
+    model=_MODEL,
+    messages=[...],
+    temperature=1.0,  # high, so repeated calls on the same input vary
+)` },
+      { type: "paragraph", text: "Styling runs at `temperature=0.7` (coherent but not robotic); captions run at `1.0` because a caption that's identical every time defeats the point. **Temperature is a design parameter, not a default to leave alone.**" },
+      { type: "heading", text: "Decision 4: A single session dict as the source of truth" },
+      { type: "paragraph", text: "State management in the agent is deliberately boring. One dictionary holds everything:\n\n• `query`: original user query\n• `parsed`: description / size / max_price\n• `search_results`: matching listings\n• `selected_item`: top result, fed to suggest_outfit\n• `wardrobe`: passed through from the caller\n• `outfit_suggestion`: LLM output\n• `fit_card`: LLM output\n• `error`: set if the run ended early\n\nEvery tool reads from and writes to this dict, so at any point in a run you can inspect the full state in one place. That makes debugging trivial and tests obvious — you assert on fields, not on hidden internal state." },
+      { type: "heading", text: "Decision 5: Fail soft, fail early" },
+      { type: "paragraph", text: "Two failure modes get explicit handling, and both refuse to crash.\n\n**No search results** short-circuits the whole pipeline. If nothing matches, the agent sets a helpful error and returns *before* touching either LLM:" },
+      { type: "code", language: "python", text: `if not results:
+    session["error"] = (
+        f'I couldn\'t find any listings matching "{parsed["description"]}"'
+        f"{size_note}{price_note}. Try removing the size filter or raising your budget."
+    )
+    return session` },
+      { type: "paragraph", text: "This is both a UX win (the message tells you *how* to fix your query) and a cost win (no point paying for a styling call on an empty result).\n\n**Empty input to the caption tool** returns a friendly string instead of throwing:" },
+      { type: "code", language: "python", text: `if not outfit or not outfit.strip():
+    return ("Couldn't generate a fit card — no outfit suggestion was "
+            "provided, but this item is a great find!")` },
+      { type: "paragraph", text: "The principle: **the agent should degrade gracefully at every boundary, never blow up in the user's face.**" },
+      { type: "heading", text: "The interface" },
+      { type: "paragraph", text: "The front end is a Gradio app — a query box, a wardrobe toggle (example closet vs. empty \"new user\" closet), and three output panels for the listing, the outfit idea, and the fit card. The handler is thin on purpose: it guards the empty query, picks a wardrobe, calls `run_agent`, and maps the session fields onto the three panels. All the logic lives in the agent; the UI just renders it.\n\nThe example queries even include a deliberate dead end — *\"designer ballgown size XXS under $5\"* — so the no-results path is one click away to demo." },
+      { type: "heading", text: "Testing" },
+      { type: "paragraph", text: "Because search and parsing are deterministic and offline, they're covered by ordinary unit tests with no mocking and no network. The LLM-backed tests skip automatically when `GROQ_API_KEY` isn't set, so the suite stays green in CI without leaking keys or burning tokens. This is the real dividend of pushing the LLM to the edges: **most of the system is testable like normal code.**" },
+      { type: "heading", text: "What I'd do next" },
+      { type: "paragraph", text: "A few honest limitations and the directions they point:\n\n• **Search is lexical, not semantic.** \"Cozy autumn sweater\" won't match a listing tagged *\"chunky knit pullover.\"* A small embedding index would close that gap — the trade-off being I'd lose some of the determinism I deliberately built around.\n• **One item, one outfit.** The agent picks only the top result. Surfacing a few options and letting the user pick would make it feel less like a lucky guess.\n• **Query parsing is rule-based.** It's predictable, but it'll miss phrasings the regex doesn't anticipate. A hybrid — regex first, LLM fallback only when parsing comes up empty — would add robustness without paying the LLM tax on every query." },
+      { type: "heading", text: "Takeaways" },
+      { type: "paragraph", text: "If there's one lesson worth carrying out of this project, it's that **a good LLM application is mostly the non-LLM parts done well.** The model is excellent at the two things that genuinely need language — styling against a real closet and writing a caption with a voice — and a liability everywhere else. Pushing it to the edges of the system bought me determinism, testability, low cost, and graceful failure, while still delivering the magic moment: type a few words, get a complete, postable outfit back.\n\nSmall project. But every decision in it was a real decision — and that's what made it worth writing about." }
     ]
   }
 ];
@@ -713,6 +905,8 @@ export default function Blogs() {
                           return <SequenceDiagram key={index} />;
                         } else if (block.name === 'rag-architecture') {
                           return <RagArchitectureDiagram key={index} />;
+                        } else if (block.name === 'fitfindr-flow') {
+                          return <FitFindrDiagram key={index} />;
                         }
                       }
                       return null;
