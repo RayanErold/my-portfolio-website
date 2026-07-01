@@ -61,7 +61,7 @@ export default function Hero() {
               className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-3xl opacity-90 font-serif"
               style={{ fontFamily: "'Times New Roman', Times, serif" }}
             >
-              Software engineer specializing in AI-integrated systems, with experience building and deploying LLM-powered applications, multi-agent architectures, and full-stack platforms in production. Skilled in Python, JavaScript, and TypeScript, with focus on prompt engineering, embeddings, and RAG. Pursuing a B.S. in Computer Science and Infromation Security.
+              Software engineer specializing in AI-integrated systems, multi-agent architectures, and full-stack platforms. Currently pursuing a B.S. in Computer Science & Information Security while engineering at the intersection of robust backend systems and modern intelligence.
             </motion.p>
 
             <motion.div

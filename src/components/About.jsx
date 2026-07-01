@@ -34,10 +34,10 @@ export default function About() {
             </h2>
             <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
               <p>
-                I'm a Computer Science student with a deep passion for backend development and AI-powered systems. I thrive on solving complex problems and building tools that make a real-world difference.
+                I build software with a focus on safety, durability, and clean architecture. I believe that engineering for the future means creating systems that are not just functional, but resilient and adaptable to the next wave of technological shifts.
               </p>
               <p>
-                With experience in building scalable APIs and automating workflows, I focus on system efficiency and user engagement. My toolkit includes Node.js, Python, and cloud technologies.
+                Whether I'm optimizing database throughput, implementing zero-hallucination RAG guardrails, or orchestrating multi-agent state machines, I approach every project with rigorous attention to detail and a commitment to clean, maintainable code.
               </p>
             </div>
           </motion.div>
