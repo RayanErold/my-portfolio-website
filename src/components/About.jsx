@@ -13,7 +13,7 @@ const highlights = [
     description: "Leveraging LLMs and machine learning to build intelligent features."
   },
   {
-    icon: <Globe className="text-blue-400" />,
+    icon: <Globe className="text-accent" />,
     title: "Cloud Native",
     description: "Deploying and managing applications with Docker and GCP."
   }
@@ -29,8 +29,10 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Engineering for the future.</h2>
-            <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-foreground" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
+              Engineering for the future.
+            </h2>
+            <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
               <p>
                 I'm a Computer Science student with a deep passion for backend development and AI-powered systems. I thrive on solving complex problems and building tools that make a real-world difference.
               </p>
@@ -48,14 +50,14 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="glass-card flex gap-6"
+                className="glass-card flex gap-6 hover:border-primary/20 transition-all duration-300 rounded-xl"
               >
-                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-400">{item.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-foreground">{item.title}</h3>
+                  <p className="text-gray-400 text-sm">{item.description}</p>
                 </div>
               </motion.div>
             ))}

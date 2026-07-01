@@ -15,6 +15,18 @@ const experiences = [
     ]
   },
   {
+    role: "Applications of AI Engineering Fellow",
+    company: "CodePath (AI 201)",
+    period: "Spring 2026",
+    location: "Remote",
+    description: [
+      "Engineered end-to-end AI systems including semantic RAG pipelines (ChromaDB) and multi-tool agent pipelines in Python.",
+      "Designed deterministic query parsing architectures and LLM validation middleware to avoid hallucinations.",
+      "Collaborated inside production codebases, leading bug hunts, writing commits, and performing code reviews.",
+      "Contributed open-source features to PathReview, an automated AI-powered evaluation assistant."
+    ]
+  },
+  {
     role: "IT Support Intern",
     company: "MTA (Metropolitan Transportation Authority)",
     period: "Previous",
@@ -27,52 +39,109 @@ const experiences = [
   }
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    scale: 0.92, 
+    y: 30 
+  },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: { 
+      type: "spring",
+      stiffness: 80,
+      damping: 15,
+      mass: 1
+    } 
+  }
+};
+
+const dotVariants = {
+  hidden: { scale: 0 },
+  visible: { 
+    scale: 1,
+    transition: { 
+      type: "spring", 
+      stiffness: 200, 
+      damping: 15 
+    }
+  }
+};
+
 export default function Experience() {
   return (
     <section id="experience" className="py-24 bg-white/[0.02]">
       <div className="section-container">
         <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">Professional Journey</h2>
 
-        <div className="max-w-4xl mx-auto space-y-12">
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={exp.company}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative pl-8 md:pl-0"
-            >
-              {/* Timeline Line */}
-              <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10 md:left-1/2 md:-translate-x-1/2" />
-              
-              {/* Timeline Dot */}
-              <div className="absolute left-0 top-0 w-8 h-8 -translate-x-1/2 bg-background border-2 border-primary rounded-full flex items-center justify-center md:left-1/2">
-                <Briefcase size={14} className="text-primary" />
-              </div>
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="max-w-4xl mx-auto relative space-y-12"
+        >
+          {/* Left Vertical Timeline Line */}
+          <div className="absolute left-4 top-2 bottom-2 w-px bg-white/10" />
 
-              <div className={`md:w-5/12 ${i % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto md:pl-12 text-left'}`}>
-                <div className={`glass-card ${i % 2 === 0 ? 'md:text-right' : ''}`}>
-                  <div className={`flex items-center gap-2 mb-2 text-primary font-bold ${i % 2 === 0 ? 'md:justify-end' : ''}`}>
-                    <Calendar size={16} /> {exp.period}
+          {experiences.map((exp, i) => (
+            <div
+              key={exp.company}
+              className="relative flex flex-col gap-4"
+            >
+              {/* Timeline Dot */}
+              <motion.div
+                variants={dotVariants}
+                className="absolute left-4 top-6 w-8 h-8 -translate-x-1/2 bg-background border-2 border-primary rounded-full flex items-center justify-center z-10"
+              >
+                <Briefcase size={14} className="text-primary" />
+              </motion.div>
+
+              {/* Card Container */}
+              <div className="w-full pl-12 md:pl-16">
+                <motion.div
+                  variants={cardVariants}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="glass-card hover:border-primary/30 transition-all duration-300 text-left w-full"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 border-b border-white/5 pb-3">
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-foreground leading-snug">{exp.role}</h3>
+                      <div className="flex items-center gap-2 text-gray-400 text-sm mt-1">
+                        <span className="font-semibold text-white">{exp.company}</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
+                        <MapPin size={12} className="text-primary" /> {exp.location}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-primary font-bold text-xs bg-primary/10 border border-primary/20 px-3 py-1 rounded-full w-fit sm:shrink-0 font-sans">
+                      <Calendar size={12} /> {exp.period}
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-1">{exp.role}</h3>
-                  <div className={`flex items-center gap-2 text-gray-400 mb-4 ${i % 2 === 0 ? 'md:justify-end' : ''}`}>
-                    <span className="font-medium text-white">{exp.company}</span>
-                    <span className="w-1 h-1 rounded-full bg-gray-600" />
-                    <MapPin size={14} /> {exp.location}
-                  </div>
-                  <ul className="space-y-2">
+
+                  <ul className="space-y-2.5">
                     {exp.description.map((item, idx) => (
-                      <li key={idx} className="text-gray-400 text-sm leading-relaxed">
-                        {item}
+                      <li key={idx} className="flex gap-2 items-start text-gray-400 text-sm leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary/50 mt-1.5 shrink-0" />
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -30,15 +30,15 @@ export default function Research() {
     <section id="research" className="py-24 bg-white/[0.02] relative">
       <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-accent/5 rounded-full blur-[140px] -z-10 animate-pulse" />
 
-      <div className="section-container">
-        <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 text-primary font-semibold mb-2">
+      <div className="section-container" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
+        <div className="max-w-3xl mb-16 text-left">
+          <div className="flex items-center gap-2 text-primary font-semibold mb-2 font-sans text-sm tracking-wide uppercase">
             <Award size={18} />
             <span>Academic Contributions</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Research & Papers</h2>
-          <p className="text-gray-400 text-lg">
-            Exploring the theoretical foundations of computer science. My research focuses on the intersection of artificial intelligence security, cryptographic protocols, and distributed systems.
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground tracking-tight">Research & Papers</h2>
+          <p className="text-gray-300 text-xl leading-relaxed italic opacity-90 max-w-2xl">
+            "Exploring the theoretical foundations of computer science, specifically focusing on artificial intelligence safety constraints, retrieval metrics, and resource-bounded agent scheduling."
           </p>
         </div>
 
@@ -117,12 +117,38 @@ export default function Research() {
               </motion.div>
             ))
           ) : (
-            <div className="text-center py-16 bg-secondary/10 border border-border/50 rounded-2xl p-8 max-w-2xl mx-auto shadow-xl">
-              <BookOpen className="text-primary/50 mx-auto mb-4 animate-pulse" size={40} />
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Publications & Preprints</h3>
-              <p className="text-muted text-sm leading-relaxed">
-                Academic publications and research manuscripts are currently being prepared for peer review. Check back soon for deep dives into AI safety middleware and rate-limiting system architectures.
-              </p>
+            <div className="text-left max-w-2xl mx-auto p-8 bg-secondary/20 border border-border/60 rounded-2xl shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-primary/20">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="flex items-center gap-3.5 mb-6 border-b border-border/30 pb-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 font-sans animate-pulse">
+                  <BookOpen size={20} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground tracking-tight">Current Research Focus</h3>
+                  <p className="text-[10px] text-primary tracking-widest font-sans font-bold uppercase mt-0.5">Status: Manuscripts in Preparation</p>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="group">
+                  <h4 className="text-lg font-bold text-foreground mb-2 leading-snug group-hover:text-primary transition-colors">
+                    I. AI Safety Middleware & Statutory Refusal Guardrails
+                  </h4>
+                  <p className="text-gray-300 text-sm leading-relaxed opacity-85">
+                    Investigating deterministic query partitioning and zero-hallucination vector retrieval constraints in consumer-protection and statutory legal domain interfaces.
+                  </p>
+                </div>
+
+                <div className="pt-5 border-t border-border/30 group">
+                  <h4 className="text-lg font-bold text-foreground mb-2 leading-snug group-hover:text-primary transition-colors">
+                    II. Rate-Limiting and Queue Scheduling for Multi-Agent Workflows
+                  </h4>
+                  <p className="text-gray-300 text-sm leading-relaxed opacity-85">
+                    Modeling latency profiles and cost optimization pathways in multi-agent routing engines running over constrained downstream LLM contexts.
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </div>
