@@ -56,6 +56,7 @@ const projects = [
     tech: ["Python", "DistilBERT", "Hugging Face", "Llama 3.3", "Streamlit"],
     metrics: ["Fine-Tuned 4-Way Classifier", "Zero-Shot LLM Comparison"],
     github: "https://github.com/RayanErold/ai201_project3_takemeter_starter_clean",
+    live: "https://www.loom.com/share/4693f68c2d8741a0a65c11f4a8b35578",
     color: "from-blue-500/20 to-indigo-500/20",
     bullets: [
       "Engineered an HTML scraping pipeline to extract post/comment text from five subreddits (r/nba, r/soccer, etc.) via old.reddit.com to avoid API blocking.",
