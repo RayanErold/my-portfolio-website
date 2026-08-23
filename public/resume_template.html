@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rayan Erold Tsapi Meguie - Resume</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.4in 0.5in;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Calibri', 'Garamond', 'Times New Roman', serif, sans-serif;
+      color: #111111;
+      background: #ffffff;
+      line-height: 1.35;
+      font-size: 10.5pt;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 18pt;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .header .contact-info {
+      font-size: 9.5pt;
+      color: #222222;
+    }
+    .header .contact-info a {
+      color: #000000;
+      text-decoration: underline;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #111111;
+      padding-bottom: 2px;
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+    .item {
+      margin-bottom: 8px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-weight: bold;
+      font-size: 10.5pt;
+    }
+    .item-subheading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-style: italic;
+      font-size: 9.5pt;
+      color: #333333;
+      margin-bottom: 3px;
+    }
+    .item-header a, .item-subheading a {
+      color: #000000;
+      text-decoration: underline;
+      font-weight: normal;
+    }
+    ul {
+      margin-left: 16px;
+      list-style-type: disc;
+    }
+    li {
+      margin-bottom: 2.5px;
+      font-size: 9.5pt;
+      text-align: justify;
+    }
+    .skills-group {
+      font-size: 9.5pt;
+      margin-bottom: 3px;
+    }
+    .skills-group strong {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>RAYAN EROLD TSAPI MEGUIE</h1>
+    <div class="contact-info">
+      New York, NY &bull; (929) 660-7912 &bull; <a href="mailto:rayanerold@gmail.com">rayanerold@gmail.com</a> &bull; <a href="https://github.com/RayanErold" target="_blank">github.com/RayanErold</a> &bull; <a href="https://linkedin.com/in/rayanmeguie" target="_blank">linkedin.com/in/rayanmeguie</a>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section-title">EDUCATION</div>
+  <div class="item">
+    <div class="item-header">
+      <span>B.S. Computer Science and Information Security | John Jay College of Criminal Justice</span>
+      <span>Expected 2027</span>
+    </div>
+    <div class="item-header">
+      <span>A.S. Computer Science | LaGuardia Community College</span>
+      <span>Graduated 2025</span>
+    </div>
+  </div>
+
+  <!-- PROFESSIONAL EXPERIENCE -->
+  <div class="section-title">PROFESSIONAL EXPERIENCE</div>
+  
+  <div class="item">
+    <div class="item-header">
+      <span>Software Engineering Intern | Mentor Me Collective <span style="font-weight: normal; font-style: italic;">&mdash; edtech nonprofit Empowering First-Generation Technologists</span></span>
+      <span>June &ndash; Oct 2025</span>
+    </div>
+    <div class="item-subheading">
+      <span>New York, NY</span>
+      <span></span>
+    </div>
+    <ul>
+      <li>Improved mentor-mentee match quality by 70%, measured by compatibility scores across 500+ users, by engineering an LLM-powered Python system with semantic embeddings that cut manual curation effort by 20%.</li>
+      <li>Increased user retention by 8%, measured across 5,000+ tracked interactions, by building real-time REST APIs with Express.js that surfaced personalized engagement signals to platform users.</li>
+      <li>Boosted interaction rates by 10%, measured via A/B test lift across two cohorts, by shipping automated Slack and email notification pipelines alongside a real-time admin analytics dashboard.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-header">
+      <span>Software Engineering Fellow | Tech Talent Pipeline</span>
+      <span>April &ndash; June 2025</span>
+    </div>
+    <div class="item-subheading">
+      <span>New York, NY</span>
+      <span></span>
+    </div>
+    <ul>
+      <li>Delivered 3 production-grade applications, measured by live CI/CD deployments on Render and Netlify, by completing an intensive full-stack bootcamp focused on end-to-end delivery.</li>
+      <li>Accelerated feature delivery across all projects, measured by integration coverage across 6 third-party APIs, by implementing reusable JWT and OAuth auth modules alongside Claude, GPT-4o, Stripe, and Resend.</li>
+    </ul>
+  </div>
+
+  <!-- TECHNICAL PROJECTS -->
+  <div class="section-title">TECHNICAL PROJECTS</div>
+
+  <div class="item">
+    <div class="item-header">
+      <span>DateSpark | AI-Powered Social Discovery</span>
+      <span>Jan. 2026 &ndash; Present</span>
+    </div>
+    <div class="item-subheading">
+      <span><a href="https://github.com/RayanErold/datespark" target="_blank">Live Site</a> | <a href="https://github.com/RayanErold/datespark" target="_blank">github.com/RayanErold/datespark</a></span>
+      <span></span>
+    </div>
+    <ul>
+      <li>Designed a custom 4-hour time-based cache validation layer using Supabase, reducing external API call volume and quota costs by 60% while ensuring real-time event updates for the end-user base.</li>
+      <li>Built a multi-source API integration pipeline (Ticketmaster, SeatGeek, SerpApi) with a fuzzy-matching deduplication algorithm, delivering 100% unique local event listings across 12 distinct categories.</li>
+      <li>Implemented Stripe billing verification and secure server-side auth checking for standard and premium subscribers, protecting high-tier features and eliminating unauthorized user access risks.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-header">
+      <span>Agentic Healthcare Navigator | Multi-Agent AI System</span>
+      <span>Mar. &ndash; Apr. 2026</span>
+    </div>
+    <div class="item-subheading">
+      <span><a href="https://github.com/RayanErold/agentic-healthcare-navigator" target="_blank">Live Site</a> | <a href="https://github.com/RayanErold/agentic-healthcare-navigator" target="_blank">github.com/RayanErold/agentic-healthcare-navigator</a></span>
+      <span></span>
+    </div>
+    <ul>
+      <li>Developed a multi-agent reasoning system using Google Gemini 2.5 Pro and a Python fallback engine for remote care clinicians, programmatically validating LLM care plans against clinical safety rules to eliminate AI hallucinations.</li>
+      <li>Created an interactive Streamlit and Pandas telemetry dashboard for a cross-functional team of healthcare providers, enabling real-time vital trend monitoring and 1-click clinical protocol authorization.</li>
+      <li>Implemented a dual-agent validation protocol (Diagnosis LLM and Medical Fact-Checker Logic Agent), enforcing a mandatory human-in-the-loop authorization step for all automated emergency medical protocols.</li>
+    </ul>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section-title">TECHNICAL SKILLS</div>
+  <div class="skills-group"><strong>Languages:</strong> Python, JavaScript, TypeScript</div>
+  <div class="skills-group"><strong>Backend:</strong> Node.js, Express.js, FastAPI, REST APIs</div>
+  <div class="skills-group"><strong>Frontend:</strong> React.js, React Native</div>
+  <div class="skills-group"><strong>Databases:</strong> PostgreSQL, Supabase, Firebase, NoSQL</div>
+  <div class="skills-group"><strong>Cloud & DevOps:</strong> Docker, CI/CD, GCP, Render, Netlify</div>
+  <div class="skills-group"><strong>AI/ML:</strong> LLM APIs, Prompt Engineering, Embeddings, RAG</div>
+
+  <!-- INVOLVEMENT -->
+  <div class="section-title">INVOLVEMENT</div>
+  
+  <div class="item">
+    <div class="item-header">
+      <span>ColorStack | Member</span>
+      <span>2025 &ndash; Present</span>
+    </div>
+    <div style="font-size: 9.5pt; margin-top: 2px;">
+      Active member engaging in peer networking, technical career workshops, and recruiting events connecting underrepresented CS students with top tech employers.
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-header">
+      <span>Hackathon Winner &mdash; Most Innovative Project | NY Tech Week</span>
+      <span>2026</span>
+    </div>
+    <div style="font-size: 9.5pt; margin-top: 2px;">
+      Built TerraWatch, a tool tracking the environmental impact of generative AI via token optimization and prompt compression, with real-time telemetry of datacenter water usage, electricity consumption, and CO<sub>2</sub> emissions per inference.
+    </div>
+  </div>
+
+</body>
+</html>

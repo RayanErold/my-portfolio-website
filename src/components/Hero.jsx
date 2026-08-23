@@ -50,18 +50,16 @@ export default function Hero() {
 
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]"
-              style={{ fontFamily: "'Times New Roman', Times, serif" }}
+              className="text-5xl md:text-7xl font-light tracking-tight mb-8 leading-[1.1]"
             >
-              Hi, I'm <span className="text-gradient">Erold Rayan.</span>
+              Hi, I'm <span className="text-gradient font-normal">Erold Rayan.</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-3xl opacity-90 font-serif"
-              style={{ fontFamily: "'Times New Roman', Times, serif" }}
+              className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-3xl opacity-90 font-light"
             >
-              Software engineer specializing in AI-integrated systems, multi-agent architectures, and full-stack platforms. Currently pursuing a B.S. in Computer Science & Information Security while engineering at the intersection of robust backend systems and modern intelligence.
+              Software engineer building AI-integrated systems, multi-agent architectures, and resilient backend platforms.
             </motion.p>
 
             <motion.div
@@ -74,9 +72,14 @@ export default function Hero() {
               <a href="#contact" className="btn-secondary flex items-center justify-center gap-2">
                 Contact Me
               </a>
-              <button className="flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-colors py-3 px-6">
-                <Download size={20} /> Resume
-              </button>
+              <a 
+                href="/Rayan_Erold_Resume_Final.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all py-3 px-6 rounded-xl font-medium cursor-pointer shadow-sm"
+              >
+                <Download size={18} className="text-primary" /> View Resume
+              </a>
             </motion.div>
           </motion.div>
 

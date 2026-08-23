@@ -3,22 +3,16 @@ import { GraduationCap } from 'lucide-react';
 
 const education = [
   {
-    degree: "B.S. Computer Science & Info Security",
+    degree: "B.S. Computer Science and Information Security",
     school: "John Jay College of Criminal Justice",
-    period: "2025 – 2027",
-    details: "Focusing on cybersecurity and advanced algorithmic systems."
+    period: "Expected 2027",
+    details: "Focusing on cybersecurity, artificial intelligence, and advanced algorithmic software systems."
   },
   {
     degree: "A.S. Computer Science",
     school: "LaGuardia Community College",
-    period: "2023 – 2025",
-    details: "Foundation in software engineering and data structures."
-  },
-  {
-    degree: "Tech Talent Pipeline Bootcamp",
-    school: "City of New York",
-    period: "Professional Development",
-    details: "Intensive training in modern web development and software architecture."
+    period: "Graduated 2025",
+    details: "Strong foundation in computer science fundamentals, data structures, algorithms, and web applications."
   }
 ];
 
@@ -28,7 +22,7 @@ export default function Education() {
       <div className="section-container">
         <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">Education</h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 max-w-4xl mx-auto gap-8">
           {education.map((edu, i) => (
             <motion.div
               key={edu.degree}

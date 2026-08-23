@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, Sun, Moon, FileText } from 'lucide-react';
 
 const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
   { name: 'Skills', href: '#skills' },
-  { name: 'Blogs', href: '#blogs' },
-  { name: 'Research', href: '#research' },
+  { name: 'Certificates', href: '#certificates' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -79,8 +78,19 @@ export default function Navbar() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex items-center gap-4 ml-2 pl-4 border-l border-white/10"
+            className="flex items-center gap-3 ml-2 pl-4 border-l border-white/10"
           >
+            {/* Direct Resume PDF Link */}
+            <a
+              href="/Rayan_Erold_Resume_Final.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/20 text-primary font-semibold text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <FileText size={14} />
+              <span>Resume</span>
+            </a>
+
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
@@ -93,14 +103,24 @@ export default function Navbar() {
             <a href="https://github.com/RayanErold" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground transition-colors">
               <Github size={20} />
             </a>
-            <a href="https://linkedin.com/in/rayan-meguie-88927127b" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground transition-colors">
+            <a href="https://linkedin.com/in/rayanmeguie" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground transition-colors">
               <Linkedin size={20} />
             </a>
           </motion.div>
         </div>
 
         {/* Mobile Toggle */}
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center gap-3 md:hidden">
+          <a
+            href="/Rayan_Erold_Resume_Final.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-1.5 rounded-xl bg-primary/10 border border-primary/20 text-primary font-semibold text-xs flex items-center gap-1"
+          >
+            <FileText size={14} />
+            <span>Resume</span>
+          </a>
+
           {/* Mobile Theme Toggle Button */}
           <button
             onClick={toggleTheme}
@@ -139,16 +159,28 @@ export default function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <div className="flex gap-6 mt-4 pt-4 border-t border-white/10">
-                <a href="https://github.com/RayanErold" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground">
-                  <Github size={24} />
+              <div className="flex items-center justify-between gap-4 mt-4 pt-4 border-t border-white/10">
+                <a
+                  href="/Rayan_Erold_Resume_Final.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-4 py-2 rounded-xl bg-primary text-black font-bold text-xs uppercase flex items-center gap-2"
+                >
+                  <FileText size={16} />
+                  <span>View Resume</span>
                 </a>
-                <a href="https://linkedin.com/in/rayan-meguie-88927127b" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground">
-                  <Linkedin size={24} />
-                </a>
-                <a href="mailto:rayanerold@gmail.com" className="text-gray-400 hover:text-foreground">
-                  <Mail size={24} />
-                </a>
+                <div className="flex gap-4">
+                  <a href="https://github.com/RayanErold" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground">
+                    <Github size={24} />
+                  </a>
+                  <a href="https://linkedin.com/in/rayanmeguie" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground">
+                    <Linkedin size={24} />
+                  </a>
+                  <a href="mailto:rayanerold@gmail.com" className="text-gray-400 hover:text-foreground">
+                    <Mail size={24} />
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>

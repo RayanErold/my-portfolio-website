@@ -3,38 +3,24 @@ import { Briefcase, Calendar, MapPin } from 'lucide-react';
 
 const experiences = [
   {
-    role: "Software Engineer Intern",
-    company: "Mentor Me Collective",
-    period: "Current",
-    location: "NYC",
+    role: "Software Engineering Intern",
+    company: "Mentor Me Collective — edtech nonprofit Empowering First-Generation Technologists",
+    period: "June – Oct 2025",
+    location: "New York, NY",
     description: [
-      "Built REST APIs for scalable backend systems.",
-      "Created notification system integrating Slack and email.",
-      "Designed administrative dashboard APIs for internal tracking.",
-      "Optimized engagement metrics through data-driven API design."
+      "Improved mentor-mentee match quality by 70%, measured by compatibility scores across 500+ users, by engineering an LLM-powered Python system with semantic embeddings that cut manual curation effort by 20%.",
+      "Increased user retention by 8%, measured across 5,000+ tracked interactions, by building real-time REST APIs with Express.js that surfaced personalized engagement signals to platform users.",
+      "Boosted interaction rates by 10%, measured via A/B test lift across two cohorts, by shipping automated Slack and email notification pipelines alongside a real-time admin analytics dashboard."
     ]
   },
   {
-    role: "Applications of AI Engineering Fellow",
-    company: "CodePath (AI 201)",
-    period: "Spring 2026",
-    location: "Remote",
+    role: "Software Engineering Fellow",
+    company: "Tech Talent Pipeline",
+    period: "April – June 2025",
+    location: "New York, NY",
     description: [
-      "Engineered end-to-end AI systems including semantic RAG pipelines (ChromaDB) and multi-tool agent pipelines in Python.",
-      "Designed deterministic query parsing architectures and LLM validation middleware to avoid hallucinations.",
-      "Collaborated inside production codebases, leading bug hunts, writing commits, and performing code reviews.",
-      "Contributed open-source features to PathReview, an automated AI-powered evaluation assistant."
-    ]
-  },
-  {
-    role: "IT Support Intern",
-    company: "MTA (Metropolitan Transportation Authority)",
-    period: "Previous",
-    location: "NYC",
-    description: [
-      "Automated onboarding workflows, reducing manual setup time by 20%.",
-      "Managed Active Directory and ServiceNow for efficient IT operations.",
-      "Supported large-scale system deployments across the agency."
+      "Delivered 3 production-grade applications, measured by live CI/CD deployments on Render and Netlify, by completing an intensive full-stack bootcamp focused on end-to-end delivery.",
+      "Accelerated feature delivery across all projects, measured by integration coverage across 6 third-party APIs, by implementing reusable JWT and OAuth auth modules alongside Claude, GPT-4o, Stripe, and Resend."
     ]
   }
 ];

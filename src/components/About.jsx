@@ -29,15 +29,12 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-foreground" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
+            <h2 className="text-4xl md:text-5xl font-light tracking-tight mb-8 text-foreground">
               Engineering for the future.
             </h2>
             <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
               <p>
-                I build software with a focus on safety, durability, and clean architecture. I believe that engineering for the future means creating systems that are not just functional, but resilient and adaptable to the next wave of technological shifts.
-              </p>
-              <p>
-                Whether I'm optimizing database throughput, implementing zero-hallucination RAG guardrails, or orchestrating multi-agent state machines, I approach every project with rigorous attention to detail and a commitment to clean, maintainable code.
+                I build software with a focus on durability, safety, and clean architecture—engineering resilient systems that adapt to technological shifts.
               </p>
             </div>
           </motion.div>
