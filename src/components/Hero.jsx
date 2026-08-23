@@ -42,12 +42,6 @@ export default function Hero() {
             animate="visible"
             className="max-w-4xl text-left flex flex-col items-start"
           >
-            <motion.div variants={itemVariants}>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-primary mb-6">
-                Available for Internships & Projects
-              </span>
-            </motion.div>
-
             <motion.h1
               variants={itemVariants}
               className="text-5xl md:text-7xl font-light tracking-tight mb-8 leading-[1.1]"
