@@ -4,24 +4,34 @@ import { ExternalLink, Github, Sparkles, CreditCard, Shield, Shirt, Play, Chevro
 
 const projects = [
   {
-    title: "Xsubscrips",
-    description: "Subscription management platform with ML-powered churn prediction and real-time cross-platform synchronization.",
-    icon: <CreditCard size={18} className="text-purple-400" />,
-    tech: ["React Native", "Supabase", "Stripe", "Resend", "ML"],
-    metrics: ["-15% Churn Reduction", "Real-time Sync"],
-    github: "https://github.com/RayanErold/Xsubscrips",
-    live: "https://xsubscrips.com/",
-    color: "from-purple-500/20 to-pink-500/20"
+    title: "Agentic Healthcare Navigator",
+    description: "Multi-agent reasoning system built with Google Gemini 2.5 Pro and a Python fallback engine for remote care clinicians, eliminating AI hallucinations.",
+    icon: <Sparkles size={18} className="text-cyan-400" />,
+    tech: ["Python", "Gemini 2.5 Pro", "Streamlit", "Pandas", "Multi-Agent"],
+    metrics: ["Zero AI Hallucinations", "Dual-Agent Safety Protocol"],
+    github: "https://github.com/RayanErold/agentic-healthcare-navigator",
+    live: "https://github.com/RayanErold/agentic-healthcare-navigator",
+    color: "from-cyan-500/20 to-blue-500/20",
+    bullets: [
+      "Developed a multi-agent reasoning system using Google Gemini 2.5 Pro and a Python fallback engine for remote care clinicians, programmatically validating LLM care plans against clinical safety rules.",
+      "Created an interactive Streamlit and Pandas telemetry dashboard for a cross-functional team of healthcare providers, enabling real-time vital trend monitoring and 1-click clinical protocol authorization.",
+      "Implemented a dual-agent validation protocol (Diagnosis LLM and Medical Fact-Checker Logic Agent), enforcing a mandatory human-in-the-loop authorization step for all automated emergency protocols."
+    ]
   },
   {
     title: "DateSpark",
-    description: "AI-powered date recommendation platform with location intelligence and subscription systems.",
+    description: "AI-powered social discovery platform with fuzzy-matching deduplication algorithms and Supabase time-based cache validation layer.",
     icon: <Sparkles size={18} className="text-yellow-400" />,
-    tech: ["Node.js", "Supabase", "LLM APIs", "Stripe", "Google Maps"],
-    metrics: ["AI-Powered Recommendations", "Real-time Locations"],
-    github: "https://github.com/RayanErold/DateSpark",
+    tech: ["Node.js", "Supabase", "Ticketmaster API", "Stripe", "SerpApi"],
+    metrics: ["-60% API Quota Cost", "100% Unique Listings"],
+    github: "https://github.com/RayanErold/datespark",
     live: "https://datespark.live/",
-    color: "from-yellow-500/20 to-orange-500/20"
+    color: "from-yellow-500/20 to-orange-500/20",
+    bullets: [
+      "Designed a custom 4-hour time-based cache validation layer using Supabase, reducing external API call volume and quota costs by 60% while ensuring real-time event updates.",
+      "Built a multi-source API integration pipeline (Ticketmaster, SeatGeek, SerpApi) with a fuzzy-matching deduplication algorithm, delivering 100% unique local event listings across 12 distinct categories.",
+      "Implemented Stripe billing verification and secure server-side auth checking for standard and premium subscribers."
+    ]
   },
   {
     title: "Consumer Rights AI Agent",
@@ -35,6 +45,16 @@ const projects = [
     color: "from-emerald-500/20 to-teal-500/20"
   },
   {
+    title: "Xsubscrips",
+    description: "Subscription management platform with ML-powered churn prediction and real-time cross-platform synchronization.",
+    icon: <CreditCard size={18} className="text-purple-400" />,
+    tech: ["React Native", "Supabase", "Stripe", "Resend", "ML"],
+    metrics: ["-15% Churn Reduction", "Real-time Sync"],
+    github: "https://github.com/RayanErold/Xsubscrips",
+    live: "https://xsubscrips.com/",
+    color: "from-purple-500/20 to-pink-500/20"
+  },
+  {
     title: "FitFindr",
     description: "Full-stack AI styling assistant that turns natural-language clothing queries into matching listings, outfit suggestions, and social media captions.",
     icon: <Shirt size={18} className="text-pink-400" />,
@@ -44,26 +64,26 @@ const projects = [
     demo: "https://www.loom.com/share/8651e2bcfb424c2caed7da6255d38e96",
     color: "from-pink-500/20 to-purple-500/20",
     bullets: [
-      "Built and shipped a full-stack web application end-to-end — interactive Gradio frontend, Python application/orchestration layer, and a JSON-backed data layer — that turns a natural-language clothing search into a matched listing, outfit suggestion, and social caption.",
-      "Architected a modular backend separating concerns across search, LLM services, and planning loop modules using a single session-state object for testable data flow.",
-      "Integrated Groq LLM API for outfit and caption generation with custom prompt design, environment-based key management, and graceful degradation.",
-      "Designed a deterministic, offline search via token-overlap relevance scoring, covered by a robust pytest suite with automated test skipping."
+      "Built and shipped a full-stack web application end-to-end — interactive Gradio frontend, Python application layer, and JSON-backed data layer.",
+      "Architected a modular backend separating concerns across search, LLM services, and planning loop modules using a single session-state object.",
+      "Integrated Groq LLM API for outfit and caption generation with custom prompt design.",
+      "Designed a deterministic, offline search via token-overlap relevance scoring with a robust pytest suite."
     ]
   },
   {
     title: "TakeMeter",
-    description: "Reddit take classifier that categorizes short posts and comments into four distinct styles (analysis, hot take, reaction, humor) using fine-tuned DistilBERT.",
+    description: "Reddit take classifier that categorizes short posts and comments into four distinct styles using fine-tuned DistilBERT.",
     icon: <MessageSquare size={18} className="text-cyan-400" />,
     tech: ["Python", "DistilBERT", "Hugging Face", "Llama 3.3", "Streamlit"],
-    metrics: ["Fine-Tuned 4-Way Classifier", "Zero-Shot LLM Comparison"],
+    metrics: ["Fine-Tuned Classifier", "Zero-Shot Comparison"],
     github: "https://github.com/RayanErold/ai201_project3_takemeter_starter_clean",
     demo: "https://www.loom.com/share/4693f68c2d8741a0a65c11f4a8b35578",
     color: "from-blue-500/20 to-indigo-500/20",
     bullets: [
-      "Engineered an HTML scraping pipeline to extract post/comment text from five subreddits (r/nba, r/soccer, etc.) via old.reddit.com to avoid API blocking.",
-      "Fine-tuned a 66M-parameter DistilBERT classifier using Hugging Face Transformers and compared results against a Llama-3.3-70B baseline.",
-      "Analyzed model limitations under severe class imbalance, identifying how macro-F1 (0.34) exposed minority-class collapse that accuracy (0.68) masked.",
-      "Built a Streamlit web interface and automated Python evaluation reports to systematically diagnose and map model decision boundaries."
+      "Engineered an HTML scraping pipeline to extract post/comment text from subreddits to avoid API blocking.",
+      "Fine-tuned a 66M-parameter DistilBERT classifier using Hugging Face Transformers.",
+      "Analyzed model limitations under severe class imbalance, identifying macro-F1 decision boundaries.",
+      "Built a Streamlit web interface and automated Python evaluation reports."
     ]
   }
 ];

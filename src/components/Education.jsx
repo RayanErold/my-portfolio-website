@@ -30,15 +30,21 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card"
+              className="glass-card flex flex-col justify-between hover:border-emerald-500/40"
             >
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-                <GraduationCap className="text-primary" size={24} />
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                    <GraduationCap className="text-emerald-400" size={24} />
+                  </div>
+                  <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                    {edu.period}
+                  </span>
+                </div>
+                <h3 className="text-xl font-extrabold mb-2 text-white">{edu.degree}</h3>
+                <p className="font-semibold text-emerald-300 text-sm mb-4">{edu.school}</p>
+                <p className="text-gray-300 text-sm leading-relaxed">{edu.details}</p>
               </div>
-              <span className="text-primary text-sm font-semibold mb-2 block">{edu.period}</span>
-              <h3 className="text-xl font-bold mb-2">{edu.degree}</h3>
-              <p className="font-medium text-gray-300 mb-4">{edu.school}</p>
-              <p className="text-gray-400 text-sm leading-relaxed">{edu.details}</p>
             </motion.div>
           ))}
         </div>
