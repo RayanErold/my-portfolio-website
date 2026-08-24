@@ -4,33 +4,33 @@ import { Code2, Database, Layout, Cloud, Brain, Lock } from 'lucide-react';
 const skillCategories = [
   {
     title: "Languages",
-    icon: <Code2 className="text-emerald-400" />,
+    icon: <Code2 className="text-primary" />,
     skills: ["Python", "JavaScript", "TypeScript"]
   },
   {
     title: "Backend",
-    icon: <Database className="text-cyan-400" />,
-    skills: ["Node.js", "Express.js", "FastAPI", "REST APIs"]
+    icon: <Database className="text-accent" />,
+    skills: ["Node.js", "Express", "FastAPI", "REST APIs", "PostgreSQL", "Supabase"]
   },
   {
     title: "Frontend",
     icon: <Layout className="text-blue-400" />,
-    skills: ["React.js", "React Native", "Tailwind CSS"]
-  },
-  {
-    title: "Databases",
-    icon: <Database className="text-teal-400" />,
-    skills: ["PostgreSQL", "Supabase", "Firebase", "NoSQL"]
+    skills: ["React.js", "React Native", "Tailwind CSS", "Framer Motion"]
   },
   {
     title: "Cloud & DevOps",
-    icon: <Cloud className="text-indigo-400" />,
-    skills: ["Docker", "CI/CD", "GCP", "Render", "Netlify"]
+    icon: <Cloud className="text-emerald-400" />,
+    skills: ["Google Cloud", "Docker", "Github", "CI/CD", "Git", "Vercel"]
   },
   {
-    title: "AI / ML",
+    title: "AI & Data",
     icon: <Brain className="text-purple-400" />,
-    skills: ["LLM APIs", "Prompt Engineering", "Embeddings", "RAG Pipelines", "Multi-Agent Architectures"]
+    skills: ["LLM APIs", "LangChain", "ChromaDB", "RAG Systems", "Vector Databases", "Multi-Agent Systems"]
+  },
+  {
+    title: "Security",
+    icon: <Lock className="text-red-400" />,
+    skills: ["JWT", "OAuth", "API Security"]
   }
 ];
 

@@ -110,15 +110,15 @@ export default function Experience() {
                         <MapPin size={12} className="text-primary" /> {exp.location}
                       </div>
                     </div>
-                    <div className="flex items-center gap-1.5 text-emerald-400 font-mono font-semibold text-xs bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full w-fit sm:shrink-0">
+                    <div className="flex items-center gap-1.5 text-primary font-bold text-xs bg-primary/10 border border-primary/20 px-3 py-1 rounded-full w-fit sm:shrink-0 font-sans">
                       <Calendar size={12} /> {exp.period}
                     </div>
                   </div>
 
-                  <ul className="space-y-3">
+                  <ul className="space-y-2.5">
                     {exp.description.map((item, idx) => (
-                      <li key={idx} className="flex gap-3 items-start text-gray-300 text-sm leading-relaxed">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
+                      <li key={idx} className="flex gap-2 items-start text-gray-400 text-sm leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary/50 mt-1.5 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
