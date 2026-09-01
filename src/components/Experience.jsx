@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 
 const experiences = [
   {
     role: "Software Engineering Intern",
-    company: "Mentor Me Collective — edtech nonprofit Empowering First-Generation Technologists",
+    company: "Mentor Me Collective — Empowering First-Gen Technologists",
     period: "June – Oct 2025",
     location: "New York, NY",
     description: [
@@ -29,7 +29,7 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.18
     }
   }
 };
@@ -37,49 +37,44 @@ const containerVariants = {
 const cardVariants = {
   hidden: { 
     opacity: 0, 
-    scale: 0.92, 
-    y: 30 
+    y: 25 
   },
   visible: { 
     opacity: 1, 
-    scale: 1, 
     y: 0,
     transition: { 
       type: "spring",
-      stiffness: 80,
-      damping: 15,
-      mass: 1
+      stiffness: 90,
+      damping: 18
     } 
-  }
-};
-
-const dotVariants = {
-  hidden: { scale: 0 },
-  visible: { 
-    scale: 1,
-    transition: { 
-      type: "spring", 
-      stiffness: 200, 
-      damping: 15 
-    }
   }
 };
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-white/[0.02]">
+    <section id="experience" className="py-24 bg-white/[0.01] relative overflow-hidden">
       <div className="section-container">
-        <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">Professional Journey</h2>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-xs font-mono text-primary uppercase tracking-widest block mb-2 font-light">
+            // Professional History
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extralight tracking-tight mb-4 text-foreground">
+            Experience & Impact
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg font-light leading-relaxed">
+            Delivering scalable APIs, LLM matching algorithms, and automated pipeline tooling in collaborative environments.
+          </p>
+        </div>
 
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           className="max-w-4xl mx-auto relative space-y-12"
         >
           {/* Left Vertical Timeline Line */}
-          <div className="absolute left-4 top-2 bottom-2 w-px bg-white/10" />
+          <div className="absolute left-4 top-3 bottom-3 w-[1px] bg-gradient-to-b from-primary/50 via-white/10 to-transparent" />
 
           {experiences.map((exp, i) => (
             <div
@@ -88,10 +83,13 @@ export default function Experience() {
             >
               {/* Timeline Dot */}
               <motion.div
-                variants={dotVariants}
-                className="absolute left-4 top-6 w-8 h-8 -translate-x-1/2 bg-background border-2 border-primary rounded-full flex items-center justify-center z-10"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="absolute left-4 top-6 w-8 h-8 -translate-x-1/2 bg-[#080c14] border border-primary/60 rounded-full flex items-center justify-center z-10 shadow-[0_0_12px_rgba(79,70,229,0.3)]"
               >
-                <Briefcase size={14} className="text-primary" />
+                <Briefcase size={13} className="text-primary" />
               </motion.div>
 
               {/* Card Container */}
@@ -99,26 +97,26 @@ export default function Experience() {
                 <motion.div
                   variants={cardVariants}
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="glass-card hover:border-primary/30 transition-all duration-300 text-left w-full"
+                  className="glass-card hover:border-primary/30 transition-all duration-300 text-left w-full p-6 sm:p-8"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 border-b border-white/5 pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 border-b border-white/5 pb-4">
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-foreground leading-snug">{exp.role}</h3>
-                      <div className="flex items-center gap-2 text-gray-400 text-sm mt-1">
-                        <span className="font-semibold text-white">{exp.company}</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
-                        <MapPin size={12} className="text-primary" /> {exp.location}
+                      <h3 className="text-xl sm:text-2xl font-light text-foreground tracking-tight">{exp.role}</h3>
+                      <div className="flex flex-wrap items-center gap-2 text-gray-400 text-xs sm:text-sm mt-1.5 font-light">
+                        <span className="font-medium text-white">{exp.company}</span>
+                        <span className="w-1 h-1 rounded-full bg-gray-600" />
+                        <span className="flex items-center gap-1 text-primary"><MapPin size={12} /> {exp.location}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1.5 text-primary font-bold text-xs bg-primary/10 border border-primary/20 px-3 py-1 rounded-full w-fit sm:shrink-0 font-sans">
+                    <div className="flex items-center gap-1.5 text-primary font-mono text-xs bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full w-fit sm:shrink-0">
                       <Calendar size={12} /> {exp.period}
                     </div>
                   </div>
 
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-3">
                     {exp.description.map((item, idx) => (
-                      <li key={idx} className="flex gap-2 items-start text-gray-400 text-sm leading-relaxed">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary/50 mt-1.5 shrink-0" />
+                      <li key={idx} className="flex gap-3 items-start text-gray-300 text-xs sm:text-sm leading-relaxed font-light">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -132,3 +130,4 @@ export default function Experience() {
     </section>
   );
 }
+

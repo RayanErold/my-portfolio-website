@@ -54,30 +54,32 @@ export default function Navbar() {
           href="#"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-bold tracking-tighter"
+          className="text-xl font-light tracking-widest font-mono flex items-center gap-1 group"
         >
-          RM<span className="text-primary">.</span>
+          <span className="font-normal text-foreground group-hover:text-primary transition-colors">RM</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse group-hover:scale-150 transition-transform" />
         </motion.a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-7">
           {navLinks.map((link, i) => (
             <motion.a
               key={link.name}
               href={link.href}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className="text-sm font-medium text-gray-400 hover:text-foreground transition-colors"
+              transition={{ delay: i * 0.04 }}
+              className="text-xs font-mono uppercase tracking-widest text-gray-400 hover:text-white transition-colors relative py-1 group"
             >
               {link.name}
+              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
             </motion.a>
           ))}
           
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.3 }}
             className="flex items-center gap-3 ml-2 pl-4 border-l border-white/10"
           >
             {/* Direct Resume PDF Link */}
@@ -85,7 +87,7 @@ export default function Navbar() {
               href="/Rayan_Erold_Resume_Final.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/20 text-primary font-semibold text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary font-mono font-medium text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-sm hover:shadow-primary/20"
             >
               <FileText size={14} />
               <span>Resume</span>
@@ -97,14 +99,14 @@ export default function Navbar() {
               className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-foreground hover:bg-white/10 transition-all cursor-pointer"
               aria-label="Toggle Theme"
             >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
 
-            <a href="https://github.com/RayanErold" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground transition-colors">
-              <Github size={20} />
+            <a href="https://github.com/RayanErold" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors p-1 hover:scale-110">
+              <Github size={18} />
             </a>
-            <a href="https://linkedin.com/in/rayanmeguie" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-foreground transition-colors">
-              <Linkedin size={20} />
+            <a href="https://linkedin.com/in/rayanmeguie" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors p-1 hover:scale-110">
+              <Linkedin size={18} />
             </a>
           </motion.div>
         </div>

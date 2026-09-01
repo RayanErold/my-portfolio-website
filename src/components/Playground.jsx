@@ -250,18 +250,20 @@ export default function Playground() {
 
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 text-primary font-semibold mb-2 bg-primary/10 px-3 py-1 rounded-full text-xs">
+          <div className="inline-flex items-center gap-2 text-primary font-mono font-medium mb-3 bg-primary/10 border border-primary/20 px-3.5 py-1 rounded-full text-xs uppercase tracking-wider">
             <Cpu size={14} className="animate-spin" />
-            <span>Interactive Simulator</span>
+            <span>// Live System Sandbox</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">AI Agent Playground</h2>
-          <p className="text-gray-400 text-lg">
-            Interact with simulated versions of my AI systems. Watch the backend pipeline execute tool calls and parse models in real-time.
+          <h2 className="text-4xl md:text-5xl font-extralight tracking-tight mb-4 text-foreground">
+            AI Agent Playground
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg font-light leading-relaxed">
+            Interact with simulated versions of my autonomous AI agent pipelines. Watch real-time tool-calling execution, vector embedding lookup, and fallback guardrails.
           </p>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex justify-center gap-4 mb-12 font-mono">
           {Object.entries(agentSimulations).map(([key, value]) => (
             <button
               key={key}

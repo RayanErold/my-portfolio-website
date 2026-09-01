@@ -4,44 +4,49 @@ import { Code2, Database, Layout, Cloud, Brain, Lock } from 'lucide-react';
 const skillCategories = [
   {
     title: "Languages",
-    icon: <Code2 className="text-primary" />,
-    skills: ["Python", "JavaScript", "TypeScript"]
+    icon: <Code2 className="text-primary" size={20} />,
+    skills: ["Python", "JavaScript", "TypeScript", "SQL", "HTML/CSS"]
   },
   {
-    title: "Backend",
-    icon: <Database className="text-accent" />,
+    title: "Backend & Systems",
+    icon: <Database className="text-accent" size={20} />,
     skills: ["Node.js", "Express", "FastAPI", "REST APIs", "PostgreSQL", "Supabase"]
   },
   {
-    title: "Frontend",
-    icon: <Layout className="text-blue-400" />,
-    skills: ["React.js", "React Native", "Tailwind CSS", "Framer Motion"]
+    title: "AI & Data Engineering",
+    icon: <Brain className="text-purple-400" size={20} />,
+    skills: ["Groq & LLMs", "ChromaDB Vector DB", "RAG Pipelines", "DistilBERT Fine-Tuning", "Multi-Agent Systems", "LangChain"]
   },
   {
     title: "Cloud & DevOps",
-    icon: <Cloud className="text-emerald-400" />,
-    skills: ["Google Cloud", "Docker", "Github", "CI/CD", "Git", "Vercel"]
+    icon: <Cloud className="text-emerald-400" size={20} />,
+    skills: ["Google Cloud", "Docker", "CI/CD Pipelines", "Git & GitHub", "Vercel / Netlify"]
   },
   {
-    title: "AI & Data",
-    icon: <Brain className="text-purple-400" />,
-    skills: ["LLM APIs", "LangChain", "ChromaDB", "RAG Systems", "Vector Databases", "Multi-Agent Systems"]
+    title: "Frontend Engineering",
+    icon: <Layout className="text-sky-400" size={20} />,
+    skills: ["React.js", "React Native", "Tailwind CSS", "Framer Motion", "Gradio & Streamlit"]
   },
   {
-    title: "Security",
-    icon: <Lock className="text-red-400" />,
-    skills: ["JWT", "OAuth", "API Security"]
+    title: "Security & Auth",
+    icon: <Lock className="text-red-400" size={20} />,
+    skills: ["JWT Authentication", "OAuth 2.0", "API Rate Limiting", "Statutory Data Compliance"]
   }
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24">
+    <section id="skills" className="py-24 relative overflow-hidden">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Technical Arsenal</h2>
-          <p className="text-gray-400 text-lg">
-            A comprehensive set of technologies I use to build robust and intelligent applications.
+          <span className="text-xs font-mono text-primary uppercase tracking-widest block mb-2 font-light">
+            // Core Competencies
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extralight tracking-tight mb-4 text-foreground">
+            Technical Arsenal
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg font-light leading-relaxed">
+            Technologies and frameworks I engineer with to deliver durable production software.
           </p>
         </div>
 
@@ -52,22 +57,22 @@ export default function Skills() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 100, damping: 15, delay: i * 0.05 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="glass-card group hover:border-primary/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300"
+              transition={{ type: "spring", stiffness: 100, damping: 18, delay: i * 0.05 }}
+              whileHover={{ y: -6, scale: 1.01 }}
+              className="glass-card group hover:border-primary/40 hover:shadow-[0_0_30px_rgba(79,70,229,0.12)] transition-all duration-300 p-6"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-primary/10">
+              <div className="flex items-center gap-3.5 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-primary/10 group-hover:border-primary/30">
                   {category.icon}
                 </div>
-                <h3 className="text-xl font-bold">{category.title}</h3>
+                <h3 className="text-lg font-medium text-foreground tracking-tight">{category.title}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map(skill => (
                   <motion.span
                     key={skill}
-                    whileHover={{ scale: 1.05, y: -1 }}
-                    className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-primary/30 transition-colors cursor-default"
+                    whileHover={{ scale: 1.04, y: -1 }}
+                    className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:border-primary/40 hover:bg-primary/10 transition-all cursor-default"
                   >
                     {skill}
                   </motion.span>
@@ -80,3 +85,4 @@ export default function Skills() {
     </section>
   );
 }
+

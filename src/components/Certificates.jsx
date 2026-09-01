@@ -47,15 +47,15 @@ export default function Certificates() {
       <div className="section-container">
         {/* Header */}
         <div className="max-w-3xl mb-16 text-left">
-          <div className="flex items-center gap-2 text-primary font-semibold mb-3 font-sans text-sm tracking-wider uppercase">
-            <Award size={18} className="animate-bounce" />
-            <span>Verified Credentials & Honors</span>
+          <div className="flex items-center gap-2 text-primary font-mono text-xs tracking-widest uppercase mb-3 font-light">
+            <Award size={16} />
+            <span>// Verified Credentials & Badges</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground tracking-tight">
-            Certifications & Badges
+          <h2 className="text-4xl md:text-5xl font-extralight mb-4 text-foreground tracking-tight">
+            Certifications & Honors
           </h2>
-          <p className="text-gray-300 text-lg leading-relaxed max-w-2xl opacity-90">
-            Professional certifications and honors demonstrating technical expertise, continuous learning, and mastery in advanced software development & AI engineering.
+          <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl font-light">
+            Validated certifications demonstrating mastery in artificial intelligence engineering, RAG pipelines, and multi-agent system design.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function Certificates() {
               className="glass-card relative group flex flex-col justify-between overflow-hidden border-white/10 hover:border-primary/40 transition-all duration-300 shadow-xl"
             >
               {/* Top Accent Gradient Bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-emerald-400 to-accent opacity-80 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-sky-400 to-accent opacity-80 group-hover:opacity-100 transition-opacity" />
 
               <div>
                 {/* Badge Header */}
@@ -81,7 +81,7 @@ export default function Certificates() {
                       <ShieldCheck size={14} /> {cert.issuer}
                     </span>
                     {cert.isHonors && (
-                      <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-gradient-to-r from-amber-500/20 to-emerald-500/20 border border-amber-400/30 text-amber-300 flex items-center gap-1">
+                      <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/30 text-amber-300 flex items-center gap-1">
                         <Trophy size={13} className="text-amber-400" /> {cert.distinction}
                       </span>
                     )}
@@ -131,7 +131,7 @@ export default function Certificates() {
                   href={cert.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary hover:text-emerald-300 font-semibold text-xs transition-all border border-primary/20 flex items-center justify-center gap-2 cursor-pointer group/btn"
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary hover:text-accent font-semibold text-xs transition-all border border-primary/20 flex items-center justify-center gap-2 cursor-pointer group/btn"
                 >
                   <FileText size={15} />
                   <span>View Certificate</span>
@@ -142,7 +142,7 @@ export default function Certificates() {
                   className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/10 cursor-pointer flex items-center gap-1.5 text-xs font-mono"
                   title="Copy Certificate ID"
                 >
-                  {copiedId ? <Check size={15} className="text-emerald-400" /> : <Copy size={15} />}
+                  {copiedId ? <Check size={15} className="text-accent" /> : <Copy size={15} />}
                   <span>ID: #{cert.credentialId}</span>
                 </button>
               </div>
