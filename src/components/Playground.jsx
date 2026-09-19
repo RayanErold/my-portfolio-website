@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sparkles, Play, RefreshCw, Terminal, ArrowRight, Search, 
-  ShieldCheck, AlertCircle, Database, Brain, Tag, ExternalLink, 
-  Shirt, ChevronRight, Cpu, Layers, HelpCircle
+import {
+  Play, RefreshCw, Terminal, Shirt,
+  ShieldCheck, AlertCircle, ChevronRight, HelpCircle
 } from 'lucide-react';
 
 const agentSimulations = {
@@ -206,10 +205,11 @@ export default function Playground() {
     };
   }, []);
 
-  // Scroll to bottom of terminal logs
+  // Scroll to bottom of terminal logs (only once logs actually exist —
+  // otherwise this fires on first mount and yanks the whole page down)
   useEffect(() => {
-    if (consoleEndRef.current) {
-      consoleEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (consoleEndRef.current && currentLogs.length > 0) {
+      consoleEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, [currentLogs]);
 
@@ -227,11 +227,9 @@ export default function Playground() {
 
     const printNextLog = () => {
       if (logIndex < logsToPrint.length) {
-        // Evaluate log entry synchronously outside state update callback
         const nextLog = logsToPrint[logIndex];
         setCurrentLogs(prev => [...prev, nextLog]);
         logIndex++;
-        // Simulate real processing speeds by varying log intervals
         timeoutRef.current = setTimeout(printNextLog, 300 + Math.random() * 200);
       } else {
         setIsRunning(false);
@@ -243,242 +241,220 @@ export default function Playground() {
   };
 
   return (
-    <section id="playground" className="py-24 bg-white/[0.01] relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[140px] -z-10 animate-pulse" />
-      <div className="absolute bottom-1/3 left-0 w-96 h-96 bg-accent/10 rounded-full blur-[140px] -z-10 animate-pulse" />
+    <section id="playground" className="section-container border-t border-border">
+      <div className="mb-14 max-w-2xl">
+        <span className="eyebrow mb-3"><span className="text-muted">—</span> Live system sandbox</span>
+        <h2 className="font-display text-3xl md:text-5xl mt-2 text-foreground">AI agent playground</h2>
+        <p className="text-muted text-sm md:text-base mt-3 leading-relaxed">
+          Interact with simulated versions of my autonomous AI agent pipelines. Watch real-time tool-calling execution, vector embedding lookup, and fallback guardrails.
+        </p>
+      </div>
 
-      <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 text-primary font-mono font-medium mb-3 bg-primary/10 border border-primary/20 px-3.5 py-1 rounded-full text-xs uppercase tracking-wider">
-            <Cpu size={14} className="animate-spin" />
-            <span>// Live System Sandbox</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extralight tracking-tight mb-4 text-foreground">
-            AI Agent Playground
-          </h2>
-          <p className="text-gray-400 text-base md:text-lg font-light leading-relaxed">
-            Interact with simulated versions of my autonomous AI agent pipelines. Watch real-time tool-calling execution, vector embedding lookup, and fallback guardrails.
-          </p>
-        </div>
+      {/* Tab Controls */}
+      <div className="flex flex-wrap gap-3 mb-10 font-mono">
+        {Object.entries(agentSimulations).map(([key, value]) => (
+          <button
+            key={key}
+            onClick={() => setActiveTab(key)}
+            className={`px-5 py-2.5 text-sm border transition-all flex items-center gap-2 cursor-pointer ${
+              activeTab === key
+                ? 'bg-foreground text-background border-foreground'
+                : 'border-border-strong text-muted hover:text-foreground'
+            }`}
+          >
+            {key === "fitfindr" ? <Shirt size={15} /> : <ShieldCheck size={15} />}
+            {value.title}
+          </button>
+        ))}
+      </div>
 
-        {/* Tab Controls */}
-        <div className="flex justify-center gap-4 mb-12 font-mono">
-          {Object.entries(agentSimulations).map(([key, value]) => (
-            <button
-              key={key}
-              onClick={() => setActiveTab(key)}
-              className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer ${
-                activeTab === key
-                  ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-105'
-                  : 'bg-secondary/40 border border-border text-gray-400 hover:text-white hover:bg-secondary/60'
-              }`}
-            >
-              {key === "fitfindr" ? <Shirt size={16} /> : <ShieldCheck size={16} />}
-              {value.title}
-            </button>
-          ))}
-        </div>
+      {/* Simulator Grid */}
+      <div className="grid lg:grid-cols-2 gap-8 items-stretch">
 
-        {/* Simulator Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
-          
-          {/* Left Panel: Query and Terminal Console */}
-          <div className="flex flex-col gap-6">
-            <div className="glass-card flex flex-col justify-between h-full">
-              <div>
-                <h3 className="text-xl font-bold mb-2 flex items-center gap-2 text-foreground">
-                  <HelpCircle size={18} className="text-primary" />
-                  Select Query Input
-                </h3>
-                <p className="text-sm text-gray-400 mb-6">
-                  {agentSimulations[activeTab].tagline}
-                </p>
+        {/* Left Panel: Query and Terminal Console */}
+        <div className="plate flex flex-col justify-between h-full">
+          <div>
+            <h3 className="font-display text-xl mb-2 flex items-center gap-2 text-foreground">
+              <HelpCircle size={17} className="text-accent" />
+              Select query input
+            </h3>
+            <p className="text-sm text-muted mb-6">
+              {agentSimulations[activeTab].tagline}
+            </p>
 
-                {/* Query selections */}
-                <div className="flex flex-col gap-3">
-                  {agentSimulations[activeTab].queries.map(q => (
-                    <button
-                      key={q.id}
-                      onClick={() => {
-                        if (!isRunning) {
-                          setSelectedQuery(q);
-                          setCurrentLogs([]);
-                          setShowResult(false);
-                        }
-                      }}
-                      disabled={isRunning}
-                      className={`w-full p-4 rounded-xl text-left border transition-all text-sm flex justify-between items-center ${
-                        selectedQuery.id === q.id
-                          ? 'bg-primary/10 border-primary text-primary font-medium'
-                          : 'bg-secondary/20 border-border text-gray-400 hover:border-gray-600 hover:text-white'
-                      } ${isRunning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-                    >
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-foreground text-xs uppercase tracking-wide opacity-80 mb-0.5">{q.label}</span>
-                        <span className="font-mono text-sm">"{q.query}"</span>
-                      </div>
-                      <ChevronRight size={16} className={`transition-transform ${selectedQuery.id === q.id ? 'translate-x-1 text-primary' : 'text-gray-500'}`} />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <button
-                onClick={handleRunSimulation}
-                disabled={isRunning}
-                className="btn-primary w-full flex items-center justify-center gap-2 mt-8 py-3.5 cursor-pointer disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed"
-              >
-                {isRunning ? (
-                  <>
-                    <RefreshCw size={18} className="animate-spin" />
-                    Executing Pipeline...
-                  </>
-                ) : (
-                  <>
-                    <Play size={18} />
-                    Run Agent Pipeline
-                  </>
-                )}
-              </button>
+            <div className="flex flex-col gap-2.5">
+              {agentSimulations[activeTab].queries.map(q => (
+                <button
+                  key={q.id}
+                  onClick={() => {
+                    if (!isRunning) {
+                      setSelectedQuery(q);
+                      setCurrentLogs([]);
+                      setShowResult(false);
+                    }
+                  }}
+                  disabled={isRunning}
+                  className={`w-full p-4 text-left border transition-all text-sm flex justify-between items-center ${
+                    selectedQuery.id === q.id
+                      ? 'bg-accent-soft border-accent text-foreground'
+                      : 'border-border text-muted hover:border-border-strong hover:text-foreground'
+                  } ${isRunning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                >
+                  <span className="flex flex-col">
+                    <span className="font-mono text-foreground text-xs uppercase tracking-wide opacity-80 mb-0.5">{q.label}</span>
+                    <span className="font-mono text-sm">"{q.query}"</span>
+                  </span>
+                  <ChevronRight size={16} className={`transition-transform shrink-0 ${selectedQuery.id === q.id ? 'translate-x-1 text-accent' : 'text-muted'}`} />
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Right Panel: Terminal Output & Result */}
-          <div className="flex flex-col gap-6">
-            <div className="glass-card flex flex-col h-[420px] bg-black/60 border-border/80 overflow-hidden relative font-mono text-xs md:text-sm">
-              {/* Terminal Title Bar */}
-              <div className="flex items-center justify-between bg-black/40 border-b border-border/50 px-4 py-2 text-gray-500 select-none">
-                <div className="flex items-center gap-2">
-                  <Terminal size={14} className="text-primary" />
-                  <span className="font-semibold text-[10px] tracking-wider uppercase">Agent Sandbox Terminal</span>
-                </div>
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/30" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/30" />
-                </div>
-              </div>
+          <button
+            onClick={handleRunSimulation}
+            disabled={isRunning}
+            className="btn-primary w-full mt-8 !py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isRunning ? (
+              <>
+                <RefreshCw size={17} className="animate-spin" />
+                Executing pipeline...
+              </>
+            ) : (
+              <>
+                <Play size={17} />
+                Run agent pipeline
+              </>
+            )}
+          </button>
+        </div>
 
-              {/* Terminal Stream Screen */}
-              <div className="flex-grow p-4 overflow-y-auto space-y-2 select-text scrollbar-thin text-left">
-                {currentLogs.length === 0 && !isRunning && (
-                  <div className="h-full flex flex-col items-center justify-center text-center text-gray-600 font-sans">
-                    <Terminal size={32} className="opacity-30 mb-3" />
-                    <p>Select a query and click "Run Agent Pipeline"</p>
-                    <p className="text-[11px] mt-1">Sandbox logs will stream here...</p>
-                  </div>
-                )}
-                {currentLogs.map((log, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.15 }}
-                    className={`leading-relaxed whitespace-pre-wrap ${
-                      log.type === "success" 
-                        ? "text-green-400 font-medium" 
-                        : log.type === "error" 
-                        ? "text-red-400 font-semibold" 
-                        : "text-gray-300"
-                    }`}
-                  >
-                    <span className="text-gray-600 select-none mr-2 font-mono">[{log.time}]</span>
-                    {log.text}
-                  </motion.div>
-                ))}
-                <div ref={consoleEndRef} />
-              </div>
+        {/* Right Panel: Terminal Output & Result */}
+        <div className="flex flex-col gap-6">
+          <div className="border border-border flex flex-col h-[420px] bg-[#0b1220] overflow-hidden relative font-mono text-xs md:text-sm">
+            <div className="flex items-center justify-between bg-black/30 border-b border-white/10 px-4 py-2 text-zinc-500 select-none">
+              <span className="flex items-center gap-2">
+                <Terminal size={13} className="text-[#7FE0FF]" />
+                <span className="font-semibold text-[10px] tracking-wider uppercase">Agent Sandbox Terminal</span>
+              </span>
+              <span className="flex gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-red-500/40" />
+                <span className="w-2 h-2 rounded-full bg-yellow-500/40" />
+                <span className="w-2 h-2 rounded-full bg-green-500/40" />
+              </span>
             </div>
 
-            {/* Output Card display */}
-            <div className="min-h-[160px] flex items-stretch">
-              <AnimatePresence mode="wait">
-                {showResult && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                    className="w-full"
-                  >
-                    {selectedQuery.result.status === "success" ? (
-                      activeTab === "fitfindr" ? (
-                        /* FitFindr Success Card */
-                        <div className="glass-card border-green-500/30 bg-green-500/[0.01] flex flex-col justify-between h-full text-left">
-                          <div>
-                            <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-                              <span className="flex items-center gap-1.5 text-xs text-green-400 font-semibold uppercase tracking-wider">
-                                <Shirt size={14} /> Item Matched
-                              </span>
-                              <span className="text-sm font-bold text-white px-2.5 py-0.5 bg-green-500/10 rounded-full border border-green-500/20">
-                                {selectedQuery.result.price}
-                              </span>
-                            </div>
-                            <h4 className="text-xl font-bold mb-3 text-foreground">{selectedQuery.result.title}</h4>
-                            
-                            <div className="mb-4">
-                              <span className="text-[10px] text-gray-500 uppercase font-semibold">Suggested Style pairing:</span>
-                              <p className="text-sm text-gray-300 mt-0.5 leading-relaxed">
-                                {selectedQuery.result.outfit}
-                              </p>
-                            </div>
+            <div className="flex-grow p-4 overflow-y-auto space-y-2 select-text text-left">
+              {currentLogs.length === 0 && !isRunning && (
+                <div className="h-full flex flex-col items-center justify-center text-center text-zinc-600 font-sans">
+                  <Terminal size={30} className="opacity-30 mb-3" />
+                  <p>Select a query and click "Run Agent Pipeline"</p>
+                  <p className="text-[11px] mt-1">Sandbox logs will stream here...</p>
+                </div>
+              )}
+              {currentLogs.map((log, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className={`leading-relaxed whitespace-pre-wrap ${
+                    log.type === "success"
+                      ? "text-green-400 font-medium"
+                      : log.type === "error"
+                      ? "text-red-400 font-semibold"
+                      : "text-zinc-300"
+                  }`}
+                >
+                  <span className="text-zinc-600 select-none mr-2">[{log.time}]</span>
+                  {log.text}
+                </motion.div>
+              ))}
+              <div ref={consoleEndRef} />
+            </div>
+          </div>
 
-                            <div className="p-3 bg-black/40 border border-border rounded-xl font-sans text-xs italic text-primary relative">
-                              <span className="absolute right-3 top-2.5 text-[9px] uppercase tracking-wide bg-primary/20 text-white font-semibold px-1 rounded">Social Copy</span>
-                              <p className="pr-12 text-gray-300 leading-normal">{selectedQuery.result.caption}</p>
-                            </div>
+          {/* Output Card display */}
+          <div className="min-h-[160px] flex items-stretch">
+            <AnimatePresence mode="wait">
+              {showResult && (
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ type: "spring", stiffness: 240, damping: 22 }}
+                  className="w-full"
+                >
+                  {selectedQuery.result.status === "success" ? (
+                    activeTab === "fitfindr" ? (
+                      <div className="plate flex flex-col justify-between h-full text-left border-l-2 !border-l-accent">
+                        <div>
+                          <div className="flex items-center justify-between mb-4 border-b border-border pb-2.5">
+                            <span className="flex items-center gap-1.5 text-xs text-accent font-mono uppercase tracking-wide">
+                              <Shirt size={14} /> Item matched
+                            </span>
+                            <span className="text-sm font-mono text-foreground px-2.5 py-0.5 bg-accent-soft">
+                              {selectedQuery.result.price}
+                            </span>
                           </div>
-                        </div>
-                      ) : (
-                        /* RAG Success Card */
-                        <div className="glass-card border-primary/30 bg-primary/[0.01] flex flex-col justify-between h-full text-left">
-                          <div>
-                            <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-                              <span className="flex items-center gap-1.5 text-xs text-primary font-semibold uppercase tracking-wider">
-                                <ShieldCheck size={14} /> Grounded Citation Found
-                              </span>
-                              <span className="text-[10px] font-mono text-primary bg-primary/10 border border-primary/25 px-2 py-0.5 rounded">
-                                {selectedQuery.result.citation}
-                              </span>
-                            </div>
-                            <h4 className="text-lg font-bold mb-3 text-foreground">{selectedQuery.result.title}</h4>
-                            <p className="text-sm text-gray-300 leading-relaxed mb-4">
-                              {selectedQuery.result.law}
+                          <h4 className="font-display text-xl mb-3 text-foreground">{selectedQuery.result.title}</h4>
+
+                          <div className="mb-4">
+                            <span className="text-[10px] text-muted uppercase font-mono">Suggested style pairing</span>
+                            <p className="text-sm text-foreground mt-1 leading-relaxed">
+                              {selectedQuery.result.outfit}
                             </p>
-                            <div className="flex items-start gap-2 bg-yellow-500/5 border border-yellow-500/20 rounded-xl p-3 text-[11px] text-yellow-300/80">
-                              <AlertCircle size={14} className="shrink-0 mt-0.5" />
-                              <span>{selectedQuery.result.warning}</span>
-                            </div>
+                          </div>
+
+                          <div className="p-3 bg-accent-soft font-sans text-xs italic text-foreground relative">
+                            <span className="absolute right-3 top-2.5 text-[9px] uppercase tracking-wide bg-foreground text-background font-mono px-1">Social copy</span>
+                            <p className="pr-16 leading-normal">{selectedQuery.result.caption}</p>
                           </div>
                         </div>
-                      )
+                      </div>
                     ) : (
-                      /* Failure Card (Refusals / No results) */
-                      <div className="glass-card border-red-500/30 bg-red-500/[0.01] flex flex-col justify-center text-left h-full">
-                        <div className="flex items-start gap-4">
-                          <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-400 shrink-0">
-                            <AlertCircle size={20} />
+                      <div className="plate flex flex-col justify-between h-full text-left border-l-2 !border-l-accent">
+                        <div>
+                          <div className="flex items-center justify-between mb-4 border-b border-border pb-2.5">
+                            <span className="flex items-center gap-1.5 text-xs text-accent font-mono uppercase tracking-wide">
+                              <ShieldCheck size={14} /> Grounded citation found
+                            </span>
+                            <span className="text-[10px] font-mono text-foreground bg-accent-soft px-2 py-0.5">
+                              {selectedQuery.result.citation}
+                            </span>
                           </div>
-                          <div>
-                            <h4 className="text-sm font-semibold uppercase tracking-wider text-red-400 mb-1">
-                              {selectedQuery.result.title}
-                            </h4>
-                            <p className="text-sm text-gray-300 leading-relaxed">
-                              {selectedQuery.result.error}
-                            </p>
+                          <h4 className="font-display text-lg mb-3 text-foreground">{selectedQuery.result.title}</h4>
+                          <p className="text-sm text-foreground leading-relaxed mb-4">
+                            {selectedQuery.result.law}
+                          </p>
+                          <div className="flex items-start gap-2 border border-signal/40 p-3 text-[11px] text-signal">
+                            <AlertCircle size={14} className="shrink-0 mt-0.5" />
+                            <span>{selectedQuery.result.warning}</span>
                           </div>
                         </div>
                       </div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
+                    )
+                  ) : (
+                    <div className="plate flex flex-col justify-center text-left h-full border-l-2 !border-l-red-500">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 shrink-0">
+                          <AlertCircle size={19} />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-mono uppercase tracking-wide text-red-500 mb-1.5">
+                            {selectedQuery.result.title}
+                          </h4>
+                          <p className="text-sm text-muted leading-relaxed">
+                            {selectedQuery.result.error}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-
         </div>
       </div>
     </section>
