@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Download, Terminal, Sparkles, Cpu, Layers } from 'lucide-react';
-import profilePic from '../assets/ProfessionalHeadsot_QuaterZip.png';
 
 const roles = [
   "AI Systems Engineer",
@@ -15,20 +14,30 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.08
+      staggerChildren: 0.1,
+      delayChildren: 0.05
     }
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100, damping: 20 }
+    transition: { type: "spring", stiffness: 110, damping: 20 }
   }
 };
+
+const nodes = [
+  { id: 'query', x: 10, y: 34, w: 100, h: 52, label: 'USER QUERY', sub: 'natural language' },
+  { id: 'docs', x: 10, y: 144, w: 100, h: 52, label: 'DOCUMENT SET', sub: 'statutes / listings' },
+  { id: 'embed', x: 160, y: 34, w: 80, h: 52, label: 'EMBED', sub: 'transformer' },
+  { id: 'chroma', x: 160, y: 144, w: 80, h: 52, label: 'CHROMADB', sub: 'vector index' },
+  { id: 'rag', x: 300, y: 86, w: 80, h: 58, label: 'RAG', sub: 'Llama 3.3 / Groq', accent: true },
+  { id: 'guard', x: 440, y: 88, w: 60, h: 54, label: 'GUARD', sub: 'temp 0.0' },
+  { id: 'out', x: 60, y: 254, w: 400, h: 52, label: 'CITED RESPONSE', sub: 'grounded in retrieved source, statute-referenced' },
+];
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -41,54 +50,44 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
-      {/* Mesh Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-20" />
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+      <div className="section-container !py-0">
+        <div className="grid lg:grid-cols-12 gap-14 items-center">
 
-      {/* Background Glows */}
-      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-primary/15 rounded-full blur-[140px] -z-10 animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-accent/15 rounded-full blur-[140px] -z-10 animate-pulse" />
-
-      <div className="section-container">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-
-          {/* Staggered text block */}
+          {/* Text block */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="lg:col-span-7 text-left flex flex-col items-start"
           >
-            {/* Status Pill Badge */}
-            <motion.div variants={itemVariants} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-xs font-mono text-gray-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-gray-300">Available for Fall 2026 Engineering Roles</span>
+            <motion.div variants={itemVariants} className="mb-7">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-strong text-xs font-mono uppercase tracking-wide text-muted">
+                <span className="w-[7px] h-[7px] rounded-full bg-signal animate-pulse" />
+                Available for Fall 2026 engineering roles
               </span>
             </motion.div>
 
-            {/* Headline */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-6xl lg:text-7xl font-extralight tracking-tight mb-6 leading-[1.15] text-foreground"
+              className="font-display text-[2.3rem] sm:text-6xl lg:text-[4.1rem] leading-[1.03] mb-5 text-foreground"
             >
-              Hi, I'm <span className="text-gradient font-light">Rayan Erold</span>
+              Rayan Erold<br />Tsapi Meguie
             </motion.h1>
 
-            {/* Dynamic Role Switcher */}
-            <motion.div variants={itemVariants} className="h-10 mb-6 flex items-center gap-3">
-              <span className="text-sm font-mono text-primary uppercase tracking-widest flex items-center gap-1.5">
-                <Terminal size={16} /> Specialized as:
+            <motion.div variants={itemVariants} className="h-9 mb-6 flex items-center gap-3 font-mono">
+              <span className="text-xs text-accent uppercase tracking-widest flex items-center gap-1.5 shrink-0">
+                <Terminal size={14} /> Specialized as:
               </span>
-              <div className="relative overflow-hidden h-8 min-w-[260px] inline-block text-left">
+              <div className="relative overflow-hidden h-7 min-w-[240px] inline-block text-left">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={roles[roleIndex]}
-                    initial={{ y: 20, opacity: 0 }}
+                    initial={{ y: 18, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
+                    exit={{ y: -18, opacity: 0 }}
                     transition={{ duration: 0.35, ease: "easeInOut" }}
-                    className="absolute inset-0 font-medium text-lg text-accent font-sans flex items-center"
+                    className="absolute inset-0 text-base text-foreground flex items-center"
                   >
                     {roles[roleIndex]}
                   </motion.span>
@@ -96,118 +95,114 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Bio Paragraph */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-gray-400 mb-10 leading-relaxed max-w-2xl font-light"
+              className="text-base sm:text-lg text-muted mb-9 leading-relaxed max-w-[46ch]"
             >
-              Engineering resilient backend infrastructure, RAG semantic search pipelines, and autonomous multi-agent software systems focused on performance and scale.
+              I build the infrastructure underneath AI products: retrieval pipelines that don't hallucinate, multi-agent systems with deterministic fallbacks, and REST APIs engineered to hold up under real load.
             </motion.p>
 
-            {/* CTAs */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-4 w-full sm:w-auto"
-            >
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
               <a href="#projects" className="btn-primary">
-                Explore Projects <ArrowRight size={16} />
+                Explore Projects <ArrowRight size={15} />
               </a>
               <a href="#playground" className="btn-secondary">
-                <Sparkles size={16} className="text-accent" /> AI Sandbox
+                <Sparkles size={15} className="text-accent" /> AI Sandbox
               </a>
-              <a 
+              <a
                 href="/Rayan_Erold_Resume_Final.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all py-3 px-5 rounded-xl font-mono text-xs uppercase tracking-wider font-medium cursor-pointer shadow-sm"
+                className="btn-secondary"
               >
-                <Download size={15} className="text-primary" /> Resume PDF
+                <Download size={15} /> Résumé PDF
               </a>
             </motion.div>
 
-            {/* Micro Tech Tags */}
-            <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-white/5 flex flex-wrap gap-6 text-xs font-mono text-gray-500">
-              <span className="flex items-center gap-2">
-                <Cpu size={14} className="text-primary" /> Python & Fast-APIs
-              </span>
-              <span className="flex items-center gap-2">
-                <Layers size={14} className="text-accent" /> RAG & ChromaDB
-              </span>
-              <span className="flex items-center gap-2">
-                <Sparkles size={14} className="text-purple-400" /> Multi-Agent Pipelines
-              </span>
+            <motion.div variants={itemVariants} className="mt-11 pt-7 border-t border-border flex flex-wrap gap-6 text-xs font-mono text-muted">
+              <span className="flex items-center gap-2"><Cpu size={13} className="text-accent" /> Python &amp; FastAPI</span>
+              <span className="flex items-center gap-2"><Layers size={13} className="text-accent" /> RAG &amp; ChromaDB</span>
+              <span className="flex items-center gap-2"><Sparkles size={13} className="text-accent" /> Multi-Agent Pipelines</span>
             </motion.div>
           </motion.div>
 
-          {/* Profile Picture with Blueprint Tech Frame */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", stiffness: 80, damping: 18, delay: 0.25 }}
+          {/* RAG pipeline schematic */}
+          <motion.figure
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-5 relative hidden lg:block"
           >
-            <div className="relative w-full aspect-[4/5] max-w-[380px] ml-auto group">
-              {/* Outer offset accent frames */}
-              <motion.div 
-                animate={{ rotate: 1 }}
-                whileHover={{ rotate: -1, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 120 }}
-                className="absolute inset-0 border border-primary/25 rounded-2xl"
-              />
-              <motion.div 
-                animate={{ rotate: -2 }}
-                whileHover={{ rotate: 2, scale: 1.01 }}
-                transition={{ type: "spring", stiffness: 120 }}
-                className="absolute inset-3 border border-accent/20 rounded-2xl pointer-events-none"
-              />
-              
-              {/* Corner tech marks */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary rounded-tl" />
-              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary rounded-tr" />
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary rounded-bl" />
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary rounded-br" />
+            <motion.div
+              initial={{ opacity: 0, rotate: 4, scale: 0.85 }}
+              animate={{ opacity: 1, rotate: -9, scale: 1 }}
+              transition={{ duration: 0.55, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute -top-2 right-2 w-[104px] h-[104px] rounded-full border-[1.5px] border-dashed border-signal flex items-center justify-center text-center text-signal font-mono text-[0.58rem] tracking-wide leading-tight uppercase"
+            >
+              Deployed<br />to prod<br />— 2026 —
+            </motion.div>
 
-              {/* Profile image frame */}
-              <div className="absolute inset-4 overflow-hidden border border-white/10 bg-secondary rounded-xl shadow-2xl">
-                <img 
-                  src={profilePic} 
-                  alt="Erold Rayan Portrait" 
-                  className="w-full h-full object-cover filter grayscale contrast-[1.08] brightness-[0.95] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                />
-                
-                {/* Tech scanline overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(79,70,229,0.04)_50%)] bg-[size:100%_4px] pointer-events-none" />
-              </div>
-              
-              {/* Decorative Metadata tag */}
-              <div className="absolute -bottom-4 right-4 px-3 py-1 rounded-md bg-black/90 backdrop-blur border border-white/10 text-[10px] font-mono text-gray-400 tracking-wider">
-                LOC: NYC // SYS: CL1-ENG
-              </div>
-              
-              <div className="absolute -top-4 left-4 px-3 py-1 rounded-md bg-black/90 backdrop-blur border border-primary/30 text-[10px] font-mono text-primary tracking-widest uppercase font-medium">
-                [ Erold Rayan ]
-              </div>
-            </div>
-          </motion.div>
+            <svg viewBox="0 0 520 340" role="img" aria-labelledby="schematicTitle" className="w-full h-auto">
+              <title id="schematicTitle">Diagram of a retrieval-augmented generation pipeline: query in, embedding, vector search, guarded LLM, cited response out.</title>
+
+              <motion.path
+                d="M60,60 H160" stroke="var(--text-muted)" strokeWidth="1.4" fill="none"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.4 }}
+              />
+              <motion.path
+                d="M60,170 H160" stroke="var(--text-muted)" strokeWidth="1.4" fill="none"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.46 }}
+              />
+              <motion.path
+                d="M240,60 L300,105" stroke="var(--text-muted)" strokeWidth="1.4" fill="none"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.52 }}
+              />
+              <motion.path
+                d="M240,170 L300,125" stroke="var(--text-muted)" strokeWidth="1.4" fill="none"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.58 }}
+              />
+              <motion.path
+                d="M380,115 H440" stroke="var(--accent)" strokeWidth="1.4" strokeDasharray="5 4" fill="none"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.64 }}
+              />
+              <motion.path
+                d="M410,150 V210 H160" stroke="var(--text-muted)" strokeWidth="1.4" fill="none"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.7 }}
+              />
+              <motion.path
+                d="M60,280 H460" stroke="var(--text-muted)" strokeWidth="1.4" strokeDasharray="2 5" fill="none"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.76 }}
+              />
+
+              {nodes.map((n, i) => (
+                <motion.g
+                  key={n.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.45, delay: 0.3 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <rect
+                    x={n.x} y={n.y} width={n.w} height={n.h}
+                    fill="var(--card)"
+                    stroke={n.accent ? "var(--accent)" : "var(--border-strong)"}
+                    strokeWidth="1.2"
+                  />
+                  <text x={n.x + 12} y={n.y + 22} fontFamily="JetBrains Mono, monospace" fontSize="10.5" fill="var(--foreground)">
+                    {n.label}
+                  </text>
+                  <text x={n.x + 12} y={n.y + 38} fontFamily="JetBrains Mono, monospace" fontSize="8.5" fill="var(--text-muted)">
+                    {n.sub}
+                  </text>
+                </motion.g>
+              ))}
+            </svg>
+            <figcaption className="mt-2.5 flex justify-between font-mono text-[0.72rem] text-muted tracking-wide">
+              <span>FIG. 00 — RAG PIPELINE, AS SHIPPED</span>
+              <span>REV 2026.09</span>
+            </figcaption>
+          </motion.figure>
         </div>
       </div>
-
-      {/* Animated Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-      >
-        <div className="w-5 h-9 border border-white/20 rounded-full flex justify-center p-1">
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-1 h-1 bg-primary rounded-full"
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }
-

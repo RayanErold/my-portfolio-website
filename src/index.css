@@ -2,63 +2,66 @@
 @config "../tailwind.config.js";
 
 :root {
-  --background: #080c14;
-  --foreground: #f3f4f6;
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --secondary: #111827;
-  --secondary-foreground: #f3f4f6;
-  --accent: #38bdf8;
-  --accent-foreground: #ffffff;
-  --card: rgba(17, 24, 39, 0.75);
-  --card-foreground: #f3f4f6;
-  --border: rgba(255, 255, 255, 0.05);
-  
-  --glass-bg: rgba(255, 255, 255, 0.015);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --glass-hover-bg: rgba(255, 255, 255, 0.04);
-  --glass-hover-border: rgba(79, 70, 229, 0.25);
-  
-  --text-muted: #8e95a0;
-  --text-muted-bright: #e5e7eb;
-  --timeline-line: rgba(255, 255, 255, 0.06);
-  --scroll-track: #080c14;
-  --scroll-thumb: rgba(79, 70, 229, 0.15);
-  --scroll-thumb-hover: rgba(79, 70, 229, 0.35);
-  
-  color-scheme: dark;
+  /* Light editorial — "paper" (default) */
+  --background: #EFF1EC;
+  --background-raised: #FBFBF9;
+  --foreground: #14181C;
+  --primary: #1F3FE0;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E7E9E2;
+  --secondary-foreground: #14181C;
+  --accent: #1F3FE0;
+  --accent-foreground: #FFFFFF;
+  --signal: #B75A22;
+  --card: #FBFBF9;
+  --card-foreground: #14181C;
+  --border: #D3D5CC;
+  --border-strong: #B7BAAF;
+
+  --accent-soft: #E1E6FB;
+  --text-muted: #4E555C;
+  --text-muted-bright: #14181C;
+  --timeline-line: #D3D5CC;
+  --scroll-track: #EFF1EC;
+  --scroll-thumb: rgba(31, 63, 224, 0.25);
+  --scroll-thumb-hover: rgba(31, 63, 224, 0.45);
+  --grid-line: rgba(20, 24, 28, 0.05);
+
+  color-scheme: light;
 }
 
-.light {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --accent: #0284c7;
-  --accent-foreground: #ffffff;
-  --card: rgba(241, 245, 249, 0.85);
-  --card-foreground: #0f172a;
-  --border: rgba(0, 0, 0, 0.08);
-  
-  --glass-bg: rgba(0, 0, 0, 0.02);
-  --glass-border: rgba(0, 0, 0, 0.06);
-  --glass-hover-bg: rgba(0, 0, 0, 0.06);
-  --glass-hover-border: rgba(79, 70, 229, 0.2);
-  
-  --text-muted: #475569;
-  --text-muted-bright: #0f172a;
-  --timeline-line: rgba(0, 0, 0, 0.08);
-  --scroll-track: #f8fafc;
-  --scroll-thumb: rgba(79, 70, 229, 0.15);
-  --scroll-thumb-hover: rgba(79, 70, 229, 0.3);
-  
-  color-scheme: light;
+.dark {
+  /* Blueprint mode */
+  --background: #0A2043;
+  --background-raised: #123063;
+  --foreground: #EAF1FF;
+  --primary: #7FE0FF;
+  --primary-foreground: #06233F;
+  --secondary: #123063;
+  --secondary-foreground: #EAF1FF;
+  --accent: #7FE0FF;
+  --accent-foreground: #06233F;
+  --signal: #FFB27A;
+  --card: #123063;
+  --card-foreground: #EAF1FF;
+  --border: rgba(234, 241, 255, 0.16);
+  --border-strong: rgba(234, 241, 255, 0.3);
+
+  --accent-soft: rgba(127, 224, 255, 0.12);
+  --text-muted: #A9BEE3;
+  --text-muted-bright: #EAF1FF;
+  --timeline-line: rgba(234, 241, 255, 0.16);
+  --scroll-track: #0A2043;
+  --scroll-thumb: rgba(127, 224, 255, 0.25);
+  --scroll-thumb-hover: rgba(127, 224, 255, 0.45);
+  --grid-line: rgba(234, 241, 255, 0.07);
+
+  color-scheme: dark;
 }
 
 @theme {
   --color-background: var(--background);
+  --color-background-raised: var(--background-raised);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -66,60 +69,126 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-signal: var(--signal);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-muted: var(--text-muted);
-  
-  /* Make standard text color helpers automatically adaptive */
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Make standard gray helpers adaptive to the two themes */
   --color-gray-400: var(--text-muted);
   --color-gray-300: var(--text-muted-bright);
 }
 
 body {
   @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 300;
-  letter-spacing: -0.015em;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
 code, kbd, samp, pre, .font-mono {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
-@utility glass {
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-}
+/* Flat "drafting plate" card: hairline border, registration-mark corners */
+@utility plate {
+  position: relative;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  @apply p-6 transition-colors duration-300;
 
-@utility glass-card {
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  @apply rounded-2xl p-6 transition-all duration-300;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+  }
+  &::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  &::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
 
   &:hover {
-    background-color: var(--glass-hover-bg);
-    border-color: var(--glass-hover-border);
-    box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.12);
+    background-color: var(--background-raised);
   }
 }
 
 @utility btn-primary {
-  @apply px-6 py-3 bg-primary text-primary-foreground rounded-xl font-mono text-xs uppercase tracking-wider font-medium transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-primary/20 hover:shadow-primary/35 border border-primary/20 flex items-center justify-center gap-2;
+  @apply px-6 py-3 bg-foreground text-background font-mono text-xs uppercase tracking-wider font-medium transition-all border flex items-center justify-center gap-2;
+  border-color: var(--foreground);
+
+  &:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    border-color: var(--accent);
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 var(--foreground);
+  }
 }
 
 @utility btn-secondary {
-  @apply px-6 py-3 bg-white/[0.03] text-foreground rounded-xl font-mono text-xs uppercase tracking-wider font-medium border transition-all hover:-translate-y-0.5 active:translate-y-0 hover:bg-white/10 hover:border-white/20 flex items-center justify-center gap-2;
-  border-color: var(--glass-border);
+  @apply px-6 py-3 bg-transparent text-foreground font-mono text-xs uppercase tracking-wider font-medium border transition-all flex items-center justify-center gap-2;
+  border-color: var(--foreground);
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 var(--accent);
+  }
 }
 
 @utility text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground via-indigo-300 to-accent font-light;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+}
+
+@utility eyebrow {
+  @apply flex items-center gap-2.5 font-mono text-[0.76rem] uppercase tracking-[0.14em];
+  color: var(--accent);
+
+  &::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background-color: var(--accent);
+    display: inline-block;
+  }
+}
+
+@utility tag-chip {
+  @apply font-mono text-[0.72rem] tracking-wide px-2.5 py-1;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
 }
 
 @utility section-container {
@@ -144,3 +213,6 @@ code, kbd, samp, pre, .font-mono {
   background: var(--scroll-thumb-hover);
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

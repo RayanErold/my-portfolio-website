@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Award, ShieldCheck, ExternalLink, Trophy, Check, Copy, Calendar, Tag, FileText } from 'lucide-react';
+import { ShieldCheck, ExternalLink, Trophy, Check, Copy, Calendar, Tag, FileText } from 'lucide-react';
 
 const certificates = [
   {
     id: "codepath-ai-eng-2026",
     title: "Applications of AI Engineering",
     issuer: "CodePath",
-    issuerLogo: "CODE PATH",
     issueDate: "Summer 2026",
     credentialId: "428956",
     distinction: "Honors",
@@ -39,118 +37,79 @@ export default function Certificates() {
   };
 
   return (
-    <section id="certificates" className="py-24 bg-white/[0.01] relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[140px] -z-10 animate-pulse" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-accent/5 rounded-full blur-[120px] -z-10" />
+    <section id="certificates" className="section-container border-t border-border">
+      <div className="mb-14">
+        <span className="eyebrow mb-3"><span className="text-muted">05</span> Verified credentials &amp; badges</span>
+        <h2 className="font-display text-3xl md:text-5xl mt-2 text-foreground">Certifications &amp; honors</h2>
+        <p className="text-muted max-w-xl text-sm md:text-base mt-3 leading-relaxed">
+          Validated certifications demonstrating mastery in artificial intelligence engineering, RAG pipelines, and multi-agent system design.
+        </p>
+      </div>
 
-      <div className="section-container">
-        {/* Header */}
-        <div className="max-w-3xl mb-16 text-left">
-          <div className="flex items-center gap-2 text-primary font-mono text-xs tracking-widest uppercase mb-3 font-light">
-            <Award size={16} />
-            <span>// Verified Credentials & Badges</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extralight mb-4 text-foreground tracking-tight">
-            Certifications & Honors
-          </h2>
-          <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl font-light">
-            Validated certifications demonstrating mastery in artificial intelligence engineering, RAG pipelines, and multi-agent system design.
-          </p>
-        </div>
-
-        {/* Certificates Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {certificates.map((cert, index) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="glass-card relative group flex flex-col justify-between overflow-hidden border-white/10 hover:border-primary/40 transition-all duration-300 shadow-xl"
-            >
-              {/* Top Accent Gradient Bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-sky-400 to-accent opacity-80 group-hover:opacity-100 transition-opacity" />
-
-              <div>
-                {/* Badge Header */}
-                <div className="flex items-center justify-between mb-5 pt-2">
-                  <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-primary/10 border border-primary/20 text-primary flex items-center gap-1.5 shadow-sm">
-                      <ShieldCheck size={14} /> {cert.issuer}
-                    </span>
-                    {cert.isHonors && (
-                      <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/30 text-amber-300 flex items-center gap-1">
-                        <Trophy size={13} className="text-amber-400" /> {cert.distinction}
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-xs font-mono text-gray-400 flex items-center gap-1">
-                    <Calendar size={12} /> {cert.issueDate}
+      <div className="grid md:grid-cols-2 gap-8">
+        {certificates.map((cert) => (
+          <div key={cert.id} className="plate flex flex-col justify-between p-7">
+            <div>
+              <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs px-2.5 py-1 border border-border-strong text-foreground flex items-center gap-1.5">
+                    <ShieldCheck size={13} /> {cert.issuer}
                   </span>
+                  {cert.isHonors && (
+                    <span className="font-mono text-xs px-2.5 py-1 border border-signal text-signal flex items-center gap-1.5">
+                      <Trophy size={13} /> {cert.distinction}
+                    </span>
+                  )}
                 </div>
-
-                {/* Title & Description */}
-                <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
-                  <a
-                    href={cert.pdfUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline flex items-center gap-2"
-                  >
-                    <span>{cert.title}</span>
-                    <ExternalLink size={16} className="inline-block text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </a>
-                </h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 opacity-90">
-                  {cert.description}
-                </p>
-
-                {/* Skills Badges */}
-                <div className="mb-6">
-                  <p className="text-xs font-mono text-gray-400 mb-2.5 flex items-center gap-1">
-                    <Tag size={12} className="text-primary" /> Competencies Validated:
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {cert.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-medium text-gray-300 hover:border-primary/30 transition-colors"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <span className="font-mono text-xs text-muted flex items-center gap-1.5">
+                  <Calendar size={12} /> {cert.issueDate}
+                </span>
               </div>
 
-              {/* Action Buttons */}
-              <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
-                <a
-                  href={cert.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary hover:text-accent font-semibold text-xs transition-all border border-primary/20 flex items-center justify-center gap-2 cursor-pointer group/btn"
-                >
-                  <FileText size={15} />
-                  <span>View Certificate</span>
-                  <ExternalLink size={14} className="opacity-70 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              <h3 className="font-display text-2xl text-foreground">
+                <a href={cert.pdfUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors inline-flex items-center gap-2">
+                  {cert.title}
+                  <ExternalLink size={15} className="text-accent" />
                 </a>
-                <button
-                  onClick={() => copyId(cert.credentialId)}
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/10 cursor-pointer flex items-center gap-1.5 text-xs font-mono"
-                  title="Copy Certificate ID"
-                >
-                  {copiedId ? <Check size={15} className="text-accent" /> : <Copy size={15} />}
-                  <span>ID: #{cert.credentialId}</span>
-                </button>
+              </h3>
+              <p className="text-muted text-sm leading-relaxed mt-2.5 mb-5">{cert.description}</p>
+
+              <p className="font-mono text-[0.72rem] text-muted uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
+                <Tag size={12} className="text-accent" /> Competencies validated
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-6">
+                {cert.skills.map((skill) => (
+                  <span key={skill} className="tag-chip">{skill}</span>
+                ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
+
+              <p className="font-mono text-[0.72rem] text-muted">
+                Signed — {cert.signatory.name}, {cert.signatory.title}
+              </p>
+            </div>
+
+            <div className="pt-5 mt-5 border-t border-border flex items-center justify-between gap-3 flex-wrap">
+              <a
+                href={cert.pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary !flex-1"
+              >
+                <FileText size={15} />
+                <span>View certificate</span>
+              </a>
+              <button
+                onClick={() => copyId(cert.credentialId)}
+                className="font-mono text-xs px-3 py-2.5 border border-border-strong text-muted hover:text-foreground transition-all cursor-pointer flex items-center gap-1.5"
+                title="Copy certificate ID"
+              >
+                {copiedId ? <Check size={14} className="text-accent" /> : <Copy size={14} />}
+                <span>ID #{cert.credentialId}</span>
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
-

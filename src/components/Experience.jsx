@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 
 const experiences = [
   {
@@ -25,109 +24,46 @@ const experiences = [
   }
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.18
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 25 
-  },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      type: "spring",
-      stiffness: 90,
-      damping: 18
-    } 
-  }
-};
-
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-white/[0.01] relative overflow-hidden">
-      <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-mono text-primary uppercase tracking-widest block mb-2 font-light">
-            // Professional History
-          </span>
-          <h2 className="text-4xl md:text-5xl font-extralight tracking-tight mb-4 text-foreground">
-            Experience & Impact
-          </h2>
-          <p className="text-gray-400 text-base md:text-lg font-light leading-relaxed">
-            Delivering scalable APIs, LLM matching algorithms, and automated pipeline tooling in collaborative environments.
-          </p>
+    <section id="experience" className="section-container border-t border-border">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
+        <div>
+          <span className="eyebrow mb-3"><span className="text-muted">03</span> Professional history</span>
+          <h2 className="font-display text-3xl md:text-5xl mt-2 text-foreground">Experience &amp; impact</h2>
         </div>
+        <p className="text-muted max-w-md text-sm md:text-base leading-relaxed">
+          Scalable APIs, LLM matching algorithms, and automated pipeline tooling, delivered in collaborative teams.
+        </p>
+      </div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="max-w-4xl mx-auto relative space-y-12"
-        >
-          {/* Left Vertical Timeline Line */}
-          <div className="absolute left-4 top-3 bottom-3 w-[1px] bg-gradient-to-b from-primary/50 via-white/10 to-transparent" />
-
-          {experiences.map((exp, i) => (
-            <div
-              key={exp.company}
-              className="relative flex flex-col gap-4"
-            >
-              {/* Timeline Dot */}
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="absolute left-4 top-6 w-8 h-8 -translate-x-1/2 bg-[#080c14] border border-primary/60 rounded-full flex items-center justify-center z-10 shadow-[0_0_12px_rgba(79,70,229,0.3)]"
-              >
-                <Briefcase size={13} className="text-primary" />
-              </motion.div>
-
-              {/* Card Container */}
-              <div className="w-full pl-12 md:pl-16">
-                <motion.div
-                  variants={cardVariants}
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="glass-card hover:border-primary/30 transition-all duration-300 text-left w-full p-6 sm:p-8"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 border-b border-white/5 pb-4">
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-light text-foreground tracking-tight">{exp.role}</h3>
-                      <div className="flex flex-wrap items-center gap-2 text-gray-400 text-xs sm:text-sm mt-1.5 font-light">
-                        <span className="font-medium text-white">{exp.company}</span>
-                        <span className="w-1 h-1 rounded-full bg-gray-600" />
-                        <span className="flex items-center gap-1 text-primary"><MapPin size={12} /> {exp.location}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-primary font-mono text-xs bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full w-fit sm:shrink-0">
-                      <Calendar size={12} /> {exp.period}
-                    </div>
-                  </div>
-
-                  <ul className="space-y-3">
-                    {exp.description.map((item, idx) => (
-                      <li key={idx} className="flex gap-3 items-start text-gray-300 text-xs sm:text-sm leading-relaxed font-light">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </div>
+      <div>
+        {experiences.map((exp, i) => (
+          <motion.div
+            key={exp.company}
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ type: "spring", stiffness: 90, damping: 20, delay: i * 0.08 }}
+            className={`grid md:grid-cols-[200px_1fr] gap-4 md:gap-8 py-8 ${i > 0 ? 'border-t border-border' : ''}`}
+          >
+            <div className="font-mono text-[0.78rem] text-muted leading-relaxed">
+              {exp.location}<br />{exp.period}
             </div>
-          ))}
-        </motion.div>
+            <div>
+              <h3 className="font-display text-xl sm:text-2xl text-foreground">{exp.role}</h3>
+              <div className="font-mono text-sm text-accent mt-1.5">{exp.company}</div>
+              <ul className="mt-4 space-y-2.5">
+                {exp.description.map((item, idx) => (
+                  <li key={idx} className="text-muted text-sm leading-relaxed pl-4 relative before:content-['—'] before:absolute before:left-0 before:text-accent">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
 }
-
